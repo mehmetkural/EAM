@@ -1,0 +1,1434 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SNA-EAM-B: Enterprise Architecture Management</title>
+  <style>
+    /* ── Reset ── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --primary:       #1e3a5f;
+      --primary-dark:  #152d4a;
+      --primary-light: #2563eb;
+      --bg:            #f1f5f9;
+      --card:          #ffffff;
+      --text:          #1e293b;
+      --muted:         #64748b;
+      --border:        #e2e8f0;
+      --c1: #2563eb;
+      --c2: #7c3aed;
+      --c3: #0891b2;
+      --c4: #059669;
+      --c5: #d97706;
+      --c6: #dc2626;
+      --c7: #7c3aed;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      min-height: 100vh;
+    }
+
+    /* ── Navbar ── */
+    nav {
+      background: var(--primary);
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      box-shadow: 0 3px 12px rgba(0,0,0,.35);
+    }
+    .nav-brand {
+      padding: 14px 20px 8px;
+      border-bottom: 1px solid rgba(255,255,255,.12);
+    }
+    .nav-brand h1 {
+      color: #fff;
+      font-size: .95rem;
+      font-weight: 700;
+      letter-spacing: .01em;
+      opacity: .95;
+    }
+    .nav-links {
+      display: flex;
+      overflow-x: auto;
+      padding: 6px 14px 8px;
+      gap: 2px;
+      scrollbar-width: none;
+    }
+    .nav-links::-webkit-scrollbar { display: none; }
+    .nav-links a {
+      color: rgba(255,255,255,.78);
+      text-decoration: none;
+      padding: 5px 11px;
+      border-radius: 6px;
+      font-size: .82rem;
+      font-weight: 500;
+      white-space: nowrap;
+      transition: background .18s, color .18s;
+    }
+    .nav-links a:hover { background: rgba(255,255,255,.18); color: #fff; }
+
+    /* ── Layout ── */
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 28px 16px 100px;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 100%);
+      color: #fff;
+      border-radius: 14px;
+      padding: 36px 28px;
+      margin-bottom: 44px;
+      box-shadow: 0 6px 24px rgba(30,58,95,.25);
+    }
+    .hero h1 {
+      font-size: 1.65rem;
+      font-weight: 800;
+      margin-bottom: 6px;
+      letter-spacing: -.01em;
+    }
+    .hero p { opacity: .85; font-size: .95rem; max-width: 600px; }
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+    }
+    .hero-tag {
+      background: rgba(255,255,255,.2);
+      backdrop-filter: blur(4px);
+      padding: 4px 13px;
+      border-radius: 20px;
+      font-size: .78rem;
+      font-weight: 500;
+    }
+
+    /* ── Section ── */
+    .section {
+      margin-bottom: 52px;
+      scroll-margin-top: 85px;
+    }
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+      padding-bottom: 12px;
+      border-bottom: 3px solid;
+    }
+    .section-num {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff;
+      font-weight: 800;
+      font-size: .9rem;
+      flex-shrink: 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,.2);
+    }
+    .section-header h2 { font-size: 1.3rem; color: var(--primary); font-weight: 700; }
+
+    /* Section color mappings */
+    .s1 .section-header { border-color: var(--c1); }
+    .s1 .section-num    { background: var(--c1); }
+    .s2 .section-header { border-color: var(--c2); }
+    .s2 .section-num    { background: var(--c2); }
+    .s3 .section-header { border-color: var(--c3); }
+    .s3 .section-num    { background: var(--c3); }
+    .s4 .section-header { border-color: var(--c4); }
+    .s4 .section-num    { background: var(--c4); }
+    .s5 .section-header { border-color: var(--c5); }
+    .s5 .section-num    { background: var(--c5); }
+    .s6 .section-header { border-color: var(--c6); }
+    .s6 .section-num    { background: var(--c6); }
+    .s7 .section-header { border-color: var(--c7); }
+    .s7 .section-num    { background: var(--c7); }
+
+    /* ── Accordion ── */
+    .accordion {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 8px;
+      background: var(--card);
+      box-shadow: 0 1px 4px rgba(0,0,0,.05);
+      overflow: hidden;
+      transition: box-shadow .2s;
+    }
+    .accordion:hover { box-shadow: 0 3px 10px rgba(0,0,0,.09); }
+    .accordion-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 18px;
+      cursor: pointer;
+      user-select: none;
+      transition: background .18s;
+    }
+    .accordion-header:hover { background: #f8fafc; }
+    .accordion-title { font-weight: 600; font-size: .93rem; color: var(--primary); }
+    .accordion-icon { font-size: 1.1rem; color: var(--muted); transition: transform .3s; }
+    .accordion.open .accordion-icon { transform: rotate(180deg); }
+    .accordion-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .35s ease, padding .25s;
+      padding: 0 18px;
+    }
+    .accordion.open .accordion-body {
+      max-height: 2400px;
+      padding: 4px 18px 18px;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── Content helpers ── */
+    .lbl {
+      font-size: .72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: var(--muted);
+      margin: 14px 0 6px;
+    }
+    ul, ol { padding-left: 22px; }
+    li { margin-bottom: 5px; font-size: .9rem; }
+    ol li { margin-bottom: 8px; }
+
+    .hbox {
+      border-left: 4px solid;
+      padding: 10px 14px;
+      border-radius: 0 8px 8px 0;
+      margin-top: 10px;
+      font-size: .88rem;
+    }
+    .hbox-def  { background: #f0f9ff; border-color: #0ea5e9; color: #0c4a6e; }
+    .hbox-warn { background: #fef3c7; border-color: #f59e0b; color: #78350f; }
+    .hbox-ok   { background: #f0fdf4; border-color: #22c55e; color: #14532d; }
+
+    /* Grid cards */
+    .g2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .g3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 12px;
+    }
+    @media (max-width: 620px) {
+      .g2, .g3 { grid-template-columns: 1fr; }
+    }
+    .card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 14px;
+      background: #f8fafc;
+    }
+    .card h4 {
+      font-size: .85rem;
+      font-weight: 700;
+      margin-bottom: 5px;
+      color: var(--primary);
+    }
+    .card p { font-size: .82rem; color: var(--muted); line-height: 1.5; }
+    .card p + p { margin-top: 4px; }
+
+    /* Table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .85rem;
+      margin-top: 10px;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    th {
+      background: var(--primary);
+      color: #fff;
+      padding: 9px 13px;
+      text-align: left;
+      font-weight: 600;
+      font-size: .82rem;
+    }
+    td { padding: 8px 13px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+    tr:nth-child(even) td { background: #f8fafc; }
+
+    /* Principle verdict items */
+    .pv {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 9px 12px;
+      border-radius: 7px;
+      margin-bottom: 6px;
+      font-size: .87rem;
+      line-height: 1.45;
+    }
+    .pv.yes { background: #dcfce7; border-left: 3px solid #22c55e; }
+    .pv.no  { background: #fee2e2; border-left: 3px solid #ef4444; }
+    .pv-tag { font-weight: 800; min-width: 48px; font-size: .8rem; }
+    .pv.yes .pv-tag { color: #15803d; }
+    .pv.no  .pv-tag { color: #dc2626; }
+
+    /* ── QUIZ ── */
+    .quiz-wrap {
+      background: var(--card);
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 16px rgba(0,0,0,.07);
+      overflow: hidden;
+    }
+
+    /* Progress bar */
+    .q-bar { height: 6px; background: #e2e8f0; }
+    .q-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #2563eb, #7c3aed);
+      width: 0%;
+      transition: width .4s ease;
+      border-radius: 0 3px 3px 0;
+    }
+
+    .q-head {
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .q-counter { font-size: .83rem; color: var(--muted); font-weight: 600; }
+    .q-pts { font-size: .85rem; font-weight: 700; color: var(--primary); }
+
+    .q-body { padding: 26px 22px 20px; }
+    .q-text {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 22px;
+      line-height: 1.5;
+    }
+    .q-opts { display: flex; flex-direction: column; gap: 8px; }
+    .q-opt {
+      display: flex;
+      align-items: flex-start;
+      gap: 11px;
+      padding: 12px 14px;
+      border: 2px solid var(--border);
+      border-radius: 9px;
+      cursor: pointer;
+      font-size: .9rem;
+      transition: border-color .18s, background .18s;
+      line-height: 1.4;
+    }
+    .q-opt:hover:not(.off) { border-color: #2563eb; background: #eff6ff; }
+    .q-opt .q-let { font-weight: 700; color: var(--muted); min-width: 22px; }
+    .q-opt.ok  { border-color: #22c55e; background: #dcfce7; }
+    .q-opt.ok .q-let  { color: #15803d; }
+    .q-opt.bad { border-color: #ef4444; background: #fee2e2; }
+    .q-opt.bad .q-let { color: #dc2626; }
+    .q-opt.off { cursor: default; }
+
+    .q-fb {
+      margin-top: 16px;
+      padding: 12px 15px;
+      border-radius: 9px;
+      font-size: .87rem;
+      line-height: 1.5;
+      display: none;
+    }
+    .q-fb.ok  { display: block; background: #dcfce7; border: 1px solid #86efac; color: #14532d; }
+    .q-fb.bad { display: block; background: #fee2e2; border: 1px solid #fca5a5; color: #991b1b; }
+
+    .q-foot {
+      padding: 14px 22px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .q-status { font-size: .83rem; color: var(--muted); }
+
+    .btn {
+      padding: 10px 22px;
+      border: none;
+      border-radius: 8px;
+      font-size: .9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background .18s, transform .15s, box-shadow .15s;
+    }
+    .btn-p {
+      background: var(--primary);
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(30,58,95,.25);
+    }
+    .btn-p:hover { background: var(--primary-dark); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(30,58,95,.3); }
+    .btn:disabled { opacity: .38; cursor: default; transform: none; box-shadow: none; }
+
+    /* Result screen */
+    .q-result {
+      padding: 48px 22px 40px;
+      text-align: center;
+    }
+    .res-emoji { font-size: 3.8rem; margin-bottom: 14px; }
+    .res-score { font-size: 3rem; font-weight: 900; color: var(--primary); line-height: 1; }
+    .res-of    { font-size: 1rem; color: var(--muted); margin: 6px 0 4px; }
+    .res-grade { font-size: 1.35rem; font-weight: 700; margin-bottom: 28px; }
+    .res-grade.ex  { color: #15803d; }
+    .res-grade.good{ color: #2563eb; }
+    .res-grade.ok  { color: #d97706; }
+    .res-grade.bad { color: #dc2626; }
+    .btn-restart {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 13px 30px;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background .18s, transform .15s;
+      box-shadow: 0 3px 10px rgba(30,58,95,.3);
+    }
+    .btn-restart:hover { background: var(--primary-dark); transform: translateY(-2px); }
+
+    /* ── Back to Top ── */
+    #btt {
+      position: fixed;
+      bottom: 24px; right: 24px;
+      width: 46px; height: 46px;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      font-size: 1.15rem;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 16px rgba(30,58,95,.4);
+      transition: transform .18s, box-shadow .18s;
+      z-index: 150;
+    }
+    #btt.show { display: flex; }
+    #btt:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(30,58,95,.5); }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .hero { padding: 26px 18px; }
+      .hero h1 { font-size: 1.3rem; }
+      .section-header h2 { font-size: 1.15rem; }
+      .q-text { font-size: .95rem; }
+      main { padding: 20px 12px 100px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════ NAVBAR ═══════════════════ -->
+<nav>
+  <div class="nav-brand">
+    <h1>SNA-EAM-B &mdash; Enterprise Architecture Management</h1>
+  </div>
+  <div class="nav-links">
+    <a href="#s1">1. Grundlagen</a>
+    <a href="#s2">2. Business Architecture</a>
+    <a href="#s3">3. Architekturprinzipien</a>
+    <a href="#s4">4. ArchiMate</a>
+    <a href="#s5">5. EAM-Aktivitäten</a>
+    <a href="#s6">6. EAM-Design</a>
+    <a href="#s7">7. Quiz</a>
+  </div>
+</nav>
+
+<!-- ═══════════════════ MAIN ═══════════════════ -->
+<main>
+
+  <!-- Hero -->
+  <div class="hero">
+    <h1>Enterprise Architecture Management</h1>
+    <p>Sınav hazırlık çalışma sitesi — accordion kartlarda tüm konuları inceleyin, ardından 18 soruluk quiz ile kendinizi test edin.</p>
+    <div class="hero-tags">
+      <span class="hero-tag">Architekturzustände</span>
+      <span class="hero-tag">Business Architecture</span>
+      <span class="hero-tag">Architekturprinzipien</span>
+      <span class="hero-tag">ArchiMate</span>
+      <span class="hero-tag">EAM-Design</span>
+      <span class="hero-tag">18 Quiz-Fragen</span>
+    </div>
+  </div>
+
+  <!-- ══════════════ 1. Grundlagen ══════════════ -->
+  <section class="section s1" id="s1">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <h2>Grundlagen</h2>
+    </div>
+
+    <!-- Architekturzustände -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggle(this)">
+        <span class="accordion-title">Architekturzustände (3 Stück)</span>
+        <span class="accordion-icon">▾</span>
+      </div>
+      <div class="accordion-body">
+        <div class="g2" style="margin-top:8px">
+          <div class="card">
+            <h4 style="color:#2563eb">📍 Baseline Architecture</h4>
+            <p><strong>IST-Architektur</strong></p>
+            <p>Aktueller Zustand der Architektur — Ausgangspunkt aller Transformationen.</p>
+          </div>
+          <div class="card">
+            <h4 style="color:#059669">🎯 Target Architecture</h4>
+            <p><strong>ZIEL-Architektur</strong></p>
+            <p>Gewünschter zukünftiger Zustand — das angestrebte Ergebnis.</p>
+          </div>
+        </div>
+        <div class="hbox hbox-def" style="margin-top:10px">
+          <strong>🔀 Transition Architecture</strong> — Zwischenzustände auf dem Weg von Baseline zu Target Architecture. Hilft, die Transformation in machbare Schritte zu unterteilen.
+        </div>
+      </div>
+    </div>
+
+    <!-- Roadmap -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggle(this)">
+        <span class="accordion-title">Architektur-Roadmap</span>
+        <span class="accordion-icon">▾</span>
+      </div>
+      <div class="accordion-body">
+        <div class="hbox hbox-def" style="margin-top:8px">
+          Beschreibt den <strong>Übergang von IST- zur ZIEL-Architektur</strong>.
+        </div>
+        <div class="lbl">Enthält:</div>
+        <ul>
+          <li>Konkrete Maßnahmen</li>
+          <li>Zeitpläne</li>
+          <li>Verantwortlichkeiten</li>
+          <li>Sequenz von Transformationen</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 3 Ebenen -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggle(this)">
+        <span class="accordion-title">3 Ebenen der Architekturbetrachtung</span>
+        <span class="accordion-icon">▾</span>
+      </div>
+      <div class="accordion-body">
+        <table>
+          <tr><th>Ebene</th><th>Beschreibung</th></tr>
+          <tr><td><strong>Enterprise Level</strong></td><td>Gesamtheitliche Betrachtung des gesamten Unternehmens</td></tr>
+          <tr><td><strong>Domain Level</strong></td><td>Spezifische Geschäfts- oder IT-Bereiche</td></tr>
+          <tr><td><strong>Solution Level</strong></td><td>Einzelne Systeme oder Lösungen</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- 3 Ziele -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggle(this)">
+        <span class="accordion-title">3 Ziele / Beweggründe für EAM</span>
+        <span class="accordion-icon">▾</span>
+      </div>
+      <div class="accordion-body">
+        <div class="g3" style="margin-top:8px">
+          <div class="card">
+            <h4>🔍 Transparenz schaffen</h4>
+            <p>"Create Baseline" — Aktuellen Zustand verstehen und dokumentieren</p>
+          </div>
+          <div class="card">
+            <h4>⚙️ Komplexität beherrschen</h4>
+            <p>"Manage Complexity" — Komplexität reduzieren und kontrollieren</p>
+          </div>
+          <div class="card">
+            <h4>🚀 Strategie umsetzen</h4>
+            <p>"Drive Transformation" — Strategie in operatives Handeln übersetzen</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ 2. Business Architecture ══════════════ -->
+  <section class="section s2" id="s2">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <h2>Business Architecture</h2>
+    </div>
+
+    <!-- Capability -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggle(this)">
+        <span class="accordion-title">Capability (Geschäftsfähigkeit)</span>
+        <span class="accordion-icon">▾</span>
+      </div>
+      <div class="accordion-body">
+        <div class="hbox hbox-def" style="margin-top:8px">
+          <strong>Definition:</strong> Eine Fähigkeit eines Unternehmens zur Erbringung einer bestimmten Leistung.
+        </div>
+        <div class="lbl">Abgrenzung vom Geschäftsprozess</div>
+        <table>
+          <tr><th>Capability</th><th>Geschäftsprozess</th></tr>
+          <tr><td><strong>WAS</strong> — stabile Fähigkeit</td><td><strong>WIE</strong> — Abfolge von Aktivitäten</td></tr>
+          <tr><td>Stabil, unabhängig von der Org-Struktur</td><td>Kann sich ändern (Reorganisation etc.)</td></tr>
+          <tr><td>z.B. "Kundenverwaltung"</td><td>z.B. "Kunde anlegen → prüfen → bestätigen"</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- Capability Map -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggle(this)">
+        <span class="accordion-title">Eigenschaften einer Capability Map (mind. 4)</span>
+        <span class="accordion-icon">▾</span>
+      </div>
+      <div class="accordion-body">
+        <div class="hbox hbox-warn" style="margin-top:8px">
+          <strong>Prüfungsrelevant:</strong> Mindestens 4 Eigenschaften nennen können!
+        </div>
+        <ul style="margin-top:10px">
+          <li><strong>Geschäftsorientiert</strong> — nicht IT- oder prozessorientiert</li>
+          <li><strong>Stabil</strong> — unabhängig von Organisationsstruktur und Prozessen</li>
+          <li><strong>Hierarchisch aufgebaut</strong> — Ebene 1, Ebene 2, ...</li>
+          <li><strong>Redundanzfrei</strong> — jede Fähigkeit nur einmal</li>
+          <li><strong>Vollständig</strong> — alle relevanten Fähigkeiten abgedeckt</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Value Stream -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggle(this)">
+        <span class="accordion-title">Value Stream (Wertstrom)</span>
+        <span class="accordion-icon">▾</span>
+      </div>
+      <div class="accordion-body">
+        <div class="hbox hbox-def" style="margin-top:8px">
+          <strong>Definition:</strong> End-to-End-Darstellung der <strong>Werterbringung</strong> für einen Stakeholder.
+        </div>
+        <div class="lbl">Eigenschaften</div>
+        <ul>
+          <li>Fokussiert auf <strong>Nutzen</strong> (nicht auf interne Prozesse)</li>
+          <li>Orientiert am <strong>Ergebnis</strong> — Verb-Noun-Syntax (z.B. "Deliver Order")</li>
+          <li>Keine klassische Prozessdarstellung</li>
+          <li>Bildet <strong>alle möglichen Szenarien</strong> ab</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 6 Perspektiven -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggle(this)">
+        <span class="accordion-title">6 weitere Perspektiven / Domänen nach Kuehn (2022)</span>
+        <span class="accordion-icon">▾</span>
+      </div>
+      <div class="accordion-body">
+        <div class="hbox hbox-warn" style="margin-top:8px">
+          Neben <strong>Capabilities</strong> und <strong>Value Streams</strong> gibt es 6 weitere Perspektiven:
+        </div>
+        <div class="g3" style="margin-top:12px">
+          <div class="card"><h4>🏢 Organization</h4><p>Organisationsstruktur und Einheiten</p></div>
+          <div class="card"><h4>📊 Information</h4><p>Daten &amp; Informationsstrukturen</p></div>
+          <div class="card"><h4>📦 Products &amp; Services</h4><p>Angebote des Unternehmens</p></div>
+          <div class="card"><h4>🚀 Initiatives</h4><p>Projekte &amp; strategische Vorhaben</p></div>
+          <div class="card"><h4>👥 Stakeholders</h4><p>Beteiligte &amp; Interessenten</p></div>
+          <div class="card"><h4>🎯 Strategy</h4><p>Strategische Ziele &amp; Richtung</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Silodenken -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggle(this)">
+        <span class="accordion-title">Warum Business Architecture Silodenken überwindet (3 Argumente)</span>
+        <span class="accordion-icon">▾</span>
+      </div>
+      <div class="accordion-body">
+        <ul style="margin-top:8px">
+          <li><strong>Gemeinsame Sprache</strong> über Abteilungsgrenzen hinweg</li>
+          <li><strong>Ganzheitliche Betrachtung</strong> der gesamten Unternehmensleistung</li>
+          <li><strong>Transparenz über Abhängigkeiten</strong> zwischen verschiedenen Bereichen</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ 3. Architekturprinzipien ══════════════ -->
+  <section class="section s3" id="s3">
+    <div class="section-header">
+      <div class="section-num">3</div>
+      <h2>Architekturprinzipien</h2>
+    </div>
+
+    <!-- Definition & Metamodell -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggle(this)">
+        <span class="accordion-title">Definition &amp; 3 Bestandteile (Metamodell nach Aier et al.)</span>
+        <span class="accordion-icon">▾</span>
+      </div>
+      <div class="accordion-body">
+        <div class="hbox hbox-def" style="margin-top:8px">
+          Qualitative Leitlinien, die die Gestaltung der Unternehmensarchitektur steuern. Sie wirken als <strong>"guide rails"</strong>, nicht als strikte Gesetze.
+        </div>
+        <div class="lbl">3 Bestandteile</div>
+        <table>
+          <tr><th>Bestandteil</th><th>Bedeutung</th></tr>
+          <tr><td><strong>Statement</strong></td><td>Die eigentliche Aussage des Prinzips</td></tr>
+          <tr><td><strong>Rationale</strong></td><td>Begründung — Warum gilt dieses Prinzip?</td></tr>
+          <tr><td><strong>Implications</strong></td><td>Konsequenzen — Was bedeutet das konkret?</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- Treiber -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggle(this)">
+        <span class="accordion-title">4 Treiber / Einflussfaktoren nach Greefhorst &amp; Proper (2011)</span>
+        <span class="accordion-icon">▾</span>
+      </div>
+      <div class="accordion-body">
+        <ul style="margin-top:8px">
+          <li><strong>Ziele &amp; Strategien</strong> ("goals &amp; objectives")</li>
+          <li><strong>Werte</strong> ("values")</li>
+          <li><strong>Probleme</strong> ("issues")</li>
+          <li><strong>Rahmenbedingungen</strong> ("constraints")</li>
+        </ul>
+        <div class="hbox hbox-warn" style="margin-top:10px">
+          Weitere Treiber: <strong>Risiken</strong> und <strong>Chancen</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- Anforderungen Sandkuhl -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggle(this)">
+        <span class="accordion-title">5 Anforderungen nach Sandkuhl et al. (2015)</span>
+        <span class="accordion-icon">▾</span>
+      </div>
+      <div class="accordion-body">
+        <ul style="margin-top:8px">
+          <li><strong>Zielorientierung</strong></li>
+          <li><strong>Aussagekräftige Beschreibung</strong></li>
+          <li><strong>Sorgfältige Kommunikation</strong></li>
+          <li><strong>Prozessverankerung</strong></li>
+          <li><strong>Messung des Erfüllungsgrads</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- SMART -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggle(this)">
+        <span class="accordion-title">SMART-Kriterien für Architekturprinzipien (Greefhorst &amp; Proper)</span>
+        <span class="accordion-icon">▾</span>
+      </div>
+      <div class="accordion-body">
+        <table>
+          <tr><th>Buchstabe</th><th>Englisch</th><th>Bedeutung</th></tr>
+          <tr><td><strong>S</strong></td><td>Specific</td><td>Spezifisch formuliert</td></tr>
+          <tr><td><strong>M</strong></td><td>Measurable</td><td>Messbar / überprüfbar</td></tr>
+          <tr><td><strong>A</strong></td><td>Achievable</td><td>Erreichbar / umsetzbar</td></tr>
+          <tr><td><strong>R</strong></td><td>Relevant</td><td>Relevant für das Unternehmen</td></tr>
+          <tr><td><strong>T</strong></td><td>Time framed</td><td>Zeitlich begrenzt / gültig</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- Beispiele -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggle(this)">
+        <span class="accordion-title">Beispiel-Beurteilungen: Ist es ein Architekturprinzip?</span>
+        <span class="accordion-icon">▾</span>
+      </div>
+      <div class="accordion-body">
+        <div class="hbox hbox-warn" style="margin-top:8px; margin-bottom:14px">
+          <strong>Prüfungstipp:</strong> Prinzip = qualitative Leitlinie. KEIN Prinzip: technische Standards, Definitionen, Methodiken oder konkrete Toolentscheidungen.
+        </div>
+        <div class="pv yes"><span class="pv-tag">✅ JA</span><span>"Applikationen sollen modular aufgebaut sein" — allgemeine Design-Richtlinie</span></div>
+        <div class="pv no"><span class="pv-tag">❌ NEIN</span><span>"Google Chrome ist unser Standard-Webbrowser" — technische Vorgabe / Standard</span></div>
+        <div class="pv no"><span class="pv-tag">❌ NEIN</span><span>"IT-Lösungen werden anhand der Capability Map fachlich eingeordnet" — Methodik, kein Prinzip</span></div>
+        <div class="pv yes"><span class="pv-tag">✅ JA</span><span>"Die Architektur sollte minimale Komplexität aufweisen"</span></div>
+        <div class="pv yes"><span class="pv-tag">✅ JA</span><span>"Kaufsoftware wird bevorzugt gegenüber Eigenentwicklung"</span></div>
+        <div class="pv no"><span class="pv-tag">❌ NEIN</span><span>"Microsoft SQL Server ist unsere Standard-Datenbank-Technologie" — Standard, kein Prinzip</span></div>
+        <div class="pv no"><span class="pv-tag">❌ NEIN</span><span>"Ein Wertstrom ist eine Ende-zu-Ende-Darstellung" — Definition, kein Prinzip</span></div>
+        <div class="pv yes"><span class="pv-tag">✅ JA</span><span>"Applikationen müssen Cloud-fähig sein"</span></div>
+        <div class="pv no"><span class="pv-tag">❌ NEIN</span><span>"Apache Kafka ist unsere Standard-Event-Streaming-Plattform" — Standard, kein Prinzip</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ 4. EA-Modellierung (ArchiMate) ══════════════ -->
+  <section class="section s4" id="s4">
+    <div class="section-header">
+      <div class="section-num">4</div>
+      <h2>EA-Modellierung (ArchiMate)</h2>
+    </div>
+
+    <!-- Was ist ArchiMate -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggle(this)">
+        <span class="accordion-title">Was ist ArchiMate?</span>
+        <span class="accordion-icon">▾</span>
+      </div>
+      <div class="accordion-body">
+        <div class="hbox hbox-def" style="margin-top:8px">
+          Standardisierte <strong>Modellierungssprache</strong> zur visuellen Darstellung von Unternehmensarchitekturen — ein <strong>Open Group Standard</strong>.
+        </div>
+      </div>
+    </div>
+
+    <!-- Layers -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggle(this)">
+        <span class="accordion-title">4 Ebenen (Layers) des ArchiMate Full Frameworks</span>
+        <span class="accordion-icon">▾</span>
+      </div>
+      <div class="accordion-body">
+        <table>
+          <tr><th>Layer</th><th>Fokus</th></tr>
+          <tr><td><strong>Strategy Layer</strong></td><td>Strategische Ziele, Fähigkeiten, Ressourcen</td></tr>
+          <tr><td><strong>Business Layer</strong></td><td>Geschäftsprozesse, Rollen, Akteure, Services</td></tr>
+          <tr><td><strong>Application Layer</strong></td><td>Anwendungen, Softwarekomponenten, Daten</td></tr>
+          <tr><td><strong>Technology Layer</strong></td><td>Infrastruktur, Hardware, Netzwerk</td></tr>
+        </table>
+        <div class="hbox hbox-warn" style="margin-top:10px">
+          Weitere Layers: <strong>Physical Layer</strong> und <strong>Implementation &amp; Migration Layer</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- Aspekte -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggle(this)">
+        <span class="accordion-title">3 Aspekte (pro Layer)</span>
+        <span class="accordion-icon">▾</span>
+      </div>
+      <div class="accordion-body">
+        <table>
+          <tr><th>Aspekt</th><th>Kernfrage</th><th>Beispiele</th></tr>
+          <tr><td><strong>Active Structure</strong></td><td>Wer führt aus?</td><td>Business Actor, Application Component</td></tr>
+          <tr><td><strong>Behavior</strong></td><td>Was wird getan?</td><td>Business Process, Application Function</td></tr>
+          <tr><td><strong>Passive Structure</strong></td><td>Womit / Worauf?</td><td>Business Object, Data Object</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- Elemente -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggle(this)">
+        <span class="accordion-title">Wichtige Elemente pro Layer</span>
+        <span class="accordion-icon">▾</span>
+      </div>
+      <div class="accordion-body">
+        <div class="g3" style="margin-top:8px">
+          <div class="card">
+            <h4>🏢 Business Layer</h4>
+            <ul style="font-size:.8rem">
+              <li>Business Actor</li>
+              <li>Business Role</li>
+              <li>Business Process</li>
+              <li>Business Function</li>
+              <li>Business Service</li>
+              <li>Business Object</li>
+              <li>Contract</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h4>💻 Application Layer</h4>
+            <ul style="font-size:.8rem">
+              <li>Application Component</li>
+              <li>Application Function</li>
+              <li>Application Service</li>
+              <li>Data Object</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h4>🖥️ Technology Layer</h4>
+            <ul style="font-size:.8rem">
+              <li>Node</li>
+              <li>System Software</li>
+              <li>Technology Service</li>
+              <li>Artifact</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Beziehungen -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggle(this)">
+        <span class="accordion-title">Wichtige Beziehungstypen in ArchiMate</span>
+        <span class="accordion-icon">▾</span>
+      </div>
+      <div class="accordion-body">
+        <table>
+          <tr><th>Beziehung</th><th>Symbol</th><th>Bedeutung</th></tr>
+          <tr><td><strong>Triggering</strong></td><td>→ (ausgefüllter Pfeil)</td><td>Zeitliche Abfolge / Auslösung</td></tr>
+          <tr><td><strong>Flow</strong></td><td>→ (offener Pfeil + Linie)</td><td>Informations- / Datenfluss</td></tr>
+          <tr><td><strong>Association</strong></td><td>Einfache Linie</td><td>Allgemeine Verbindung</td></tr>
+          <tr><td><strong>Realization</strong></td><td>△ gestrichelt</td><td>Etwas wird realisiert durch</td></tr>
+          <tr><td><strong>Assignment</strong></td><td>●─</td><td>Zuweisung: Rolle → Verhalten</td></tr>
+          <tr><td><strong>Serving</strong></td><td>→ (offener Pfeil)</td><td>Dienst erbringen für</td></tr>
+          <tr><td><strong>Composition</strong></td><td>◆ (gefüllt)</td><td>Zusammensetzung (exklusiv)</td></tr>
+          <tr><td><strong>Aggregation</strong></td><td>◇ (offen)</td><td>Aggregation (nicht exklusiv)</td></tr>
+          <tr><td><strong>Influence</strong></td><td>- - → (gestrichelt)</td><td>Beeinflussung</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- Viewpoint, View, Concern -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggle(this)">
+        <span class="accordion-title">Viewpoint, View &amp; Concern</span>
+        <span class="accordion-icon">▾</span>
+      </div>
+      <div class="accordion-body">
+        <table>
+          <tr><th>Begriff</th><th>Definition</th></tr>
+          <tr><td><strong>Viewpoint</strong></td><td>Standardisierte Perspektive / Vorlage (Template) auf die Architektur</td></tr>
+          <tr><td><strong>View</strong></td><td>Konkrete Darstellung einer Architektur auf Basis eines Viewpoints</td></tr>
+          <tr><td><strong>Concern</strong></td><td>Anliegen eines Stakeholders, das durch eine View adressiert wird</td></tr>
+        </table>
+        <div class="hbox hbox-ok" style="margin-top:10px">
+          <strong>Merkhilfe:</strong> Viewpoint = Template (abstrakt) &nbsp;|&nbsp; View = Instanz (konkret)
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ 5. EAM-Aktivitäten ══════════════ -->
+  <section class="section s5" id="s5">
+    <div class="section-header">
+      <div class="section-num">5</div>
+      <h2>EAM-Aktivitäten (Tätigkeitsfelder)</h2>
+    </div>
+
+    <!-- 6 Tätigkeitsfelder -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggle(this)">
+        <span class="accordion-title">6 EAM-Tätigkeitsfelder</span>
+        <span class="accordion-icon">▾</span>
+      </div>
+      <div class="accordion-body">
+        <table>
+          <tr><th>#</th><th>Tätigkeitsfeld</th><th>Ziel / Beschreibung</th></tr>
+          <tr><td>1</td><td><strong>Architekturentwicklung</strong><br><small>Develop Architecture</small></td><td>Ziel-Architektur und Roadmap entwickeln</td></tr>
+          <tr><td>2</td><td><strong>Architekturanalyse</strong><br><small>Analyse Architecture</small></td><td>Schwachstellen, Lücken, Redundanzen identifizieren</td></tr>
+          <tr><td>3</td><td><strong>Architekturentscheidungsfindung</strong></td><td>Architektur-Konformität und Alternativen bewerten</td></tr>
+          <tr><td>4</td><td><strong>Strategiedefinition &amp; -operationalisierung</strong></td><td>Strategie in Architektur übersetzen</td></tr>
+          <tr><td>5</td><td><strong>EAM-Kommunikation</strong></td><td>Stakeholder informieren, Darstellungen erstellen</td></tr>
+          <tr><td>6</td><td><strong>EAM-Steuerung</strong></td><td>EAM-Prozesse und Organisation managen</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- 2 Kernaktivitäten -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggle(this)">
+        <span class="accordion-title">2 Kernaktivitäten der Architekturentwicklung</span>
+        <span class="accordion-icon">▾</span>
+      </div>
+      <div class="accordion-body">
+        <div class="g2" style="margin-top:8px">
+          <div class="card">
+            <h4>🎯 Ziel-Architektur entwickeln</h4>
+            <p>Inkl. Gap-Analyse und Transitionsarchitektur bestimmen</p>
+          </div>
+          <div class="card">
+            <h4>🗺️ Architektur-Roadmap steuern</h4>
+            <p>Roadmap erstellen, steuern und aktuell halten</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Operating Model -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggle(this)">
+        <span class="accordion-title">Operating Models nach Ross et al. (2006)</span>
+        <span class="accordion-icon">▾</span>
+      </div>
+      <div class="accordion-body">
+        <div class="lbl" style="margin-top:8px">2 Dimensionen</div>
+        <ul>
+          <li><strong>Standardisierung:</strong> Wie einheitlich sind Prozesse definiert?</li>
+          <li><strong>Integration:</strong> Wie stark sind Organisationseinheiten durch geteilte Daten verknüpft?</li>
+        </ul>
+        <div class="lbl">4 Operating Model Typen (Matrix)</div>
+        <table>
+          <tr><th></th><th>Niedrige Integration</th><th>Hohe Integration</th></tr>
+          <tr>
+            <td><strong>Niedrige Standardisierung</strong></td>
+            <td style="background:#fef9c3"><strong>Diversification</strong><br><small>Autonome Einheiten, wenig Gemeinsamkeiten</small></td>
+            <td style="background:#dbeafe"><strong>Coordination</strong><br><small>Geteilte Daten, aber eigenständige Prozesse</small></td>
+          </tr>
+          <tr>
+            <td><strong>Hohe Standardisierung</strong></td>
+            <td style="background:#dcfce7"><strong>Replication</strong><br><small>Einheitliche Prozesse, kaum Daten-Sharing</small></td>
+            <td style="background:#f3e8ff"><strong>Unification</strong><br><small>Max. Standardisierung &amp; Integration</small></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- 3 Disziplinen -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggle(this)">
+        <span class="accordion-title">3 Disziplinen für EAM-Verzahnung</span>
+        <span class="accordion-icon">▾</span>
+      </div>
+      <div class="accordion-body">
+        <ul style="margin-top:8px">
+          <li><strong>IT-Portfoliomanagement</strong></li>
+          <li><strong>Projektmanagement / IT-Governance</strong></li>
+          <li><strong>Strategisches Management / Business Architecture</strong></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ 6. EAM-Design ══════════════ -->
+  <section class="section s6" id="s6">
+    <div class="section-header">
+      <div class="section-num">6</div>
+      <h2>EAM-Design</h2>
+    </div>
+
+    <!-- 6 Dimensionen -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggle(this)">
+        <span class="accordion-title">6 EAM-Gestaltungsdimensionen</span>
+        <span class="accordion-icon">▾</span>
+      </div>
+      <div class="accordion-body">
+        <table>
+          <tr><th>#</th><th>Dimension</th><th>Kernfrage</th></tr>
+          <tr><td>1</td><td><strong>EAM-Motivation</strong></td><td>Warum wird EAM eingeführt? Ziele, Mission, Vision</td></tr>
+          <tr><td>2</td><td><strong>EAM-Angebot</strong></td><td>Welche Services / Leistungen bietet EAM? (Service Portfolio)</td></tr>
+          <tr><td>3</td><td><strong>EAM-Inhalte</strong></td><td>Was wird erfasst? Metamodell der Architekturinhalte</td></tr>
+          <tr><td>4</td><td><strong>EAM-Werkzeuge</strong></td><td>Welches Tool wird eingesetzt? Funktionalitäten</td></tr>
+          <tr><td>5</td><td><strong>EAM-Prozesse</strong></td><td>Kern-, Steuerungs- und Unterstützungsprozesse</td></tr>
+          <tr><td>6</td><td><strong>EAM-Organisation</strong></td><td>Rollen, Struktur, Gremien</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- 3 Organisationsmodelle -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggle(this)">
+        <span class="accordion-title">3 Organisationsmodelle</span>
+        <span class="accordion-icon">▾</span>
+      </div>
+      <div class="accordion-body">
+        <div class="g3" style="margin-top:8px">
+          <div class="card">
+            <h4>🏛️ Zentralisiert</h4>
+            <p>Eine zentrale EA-Abteilung steuert alle Aktivitäten.</p>
+            <p style="color:#059669;margin-top:6px">Geeignet für stark zentralisierte Unternehmen</p>
+          </div>
+          <div class="card">
+            <h4>🔀 Dezentralisiert</h4>
+            <p>Jede Business-Unit hat eigene EA-Experten.</p>
+            <p style="color:#059669;margin-top:6px">Geeignet für autonome Divisionen</p>
+          </div>
+          <div class="card" style="border-color:#d97706">
+            <h4 style="color:#b45309">⚖️ Hybrid ★</h4>
+            <p>Zentrale Steuerung + dezentrale Umsetzung.</p>
+            <p style="color:#b45309;margin-top:6px"><strong>Häufigster Ansatz in der Praxis</strong></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EAM in/außer IT -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggle(this)">
+        <span class="accordion-title">EAM innerhalb oder außerhalb der IT?</span>
+        <span class="accordion-icon">▾</span>
+      </div>
+      <div class="accordion-body">
+        <table>
+          <tr><th></th><th>Innerhalb IT</th><th>Außerhalb IT</th></tr>
+          <tr><td><strong>Fokus</strong></td><td>Stärker technisch</td><td>Stärker strategisch</td></tr>
+          <tr><td><strong>Vorteil</strong></td><td>Bessere IT-Integration</td><td>Mehr Business-Nähe</td></tr>
+          <tr><td><strong>Risiko</strong></td><td>Business-Ferne</td><td>IT-Distanz</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- Vorgehensmodell -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggle(this)">
+        <span class="accordion-title">Vorgehensmodell zur EAM-Einführung (5 Schritte)</span>
+        <span class="accordion-icon">▾</span>
+      </div>
+      <div class="accordion-body">
+        <ol style="margin-top:10px">
+          <li><strong>Analyse der aktuellen Situation</strong></li>
+          <li><strong>Zieldefinition &amp; Strategie</strong></li>
+          <li><strong>Governance &amp; Prozesse etablieren</strong></li>
+          <li><strong>Tooling &amp; Methoden auswählen</strong></li>
+          <li><strong>Schrittweise Umsetzung &amp; Anpassung</strong></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ 7. Quiz ══════════════ -->
+  <section class="section s7" id="s7">
+    <div class="section-header">
+      <div class="section-num">7</div>
+      <h2>Quiz &mdash; Wissen testen</h2>
+    </div>
+
+    <div class="quiz-wrap">
+      <!-- Progress bar -->
+      <div class="q-bar"><div class="q-bar-fill" id="qFill"></div></div>
+
+      <!-- Main quiz -->
+      <div id="qMain">
+        <div class="q-head">
+          <span class="q-counter" id="qCounter">Frage 1 von 18</span>
+          <span class="q-pts" id="qPts">Punkte: 0</span>
+        </div>
+        <div class="q-body">
+          <div class="q-text" id="qText"></div>
+          <div class="q-opts" id="qOpts"></div>
+          <div class="q-fb"  id="qFb"></div>
+        </div>
+        <div class="q-foot">
+          <span id="qStatus" class="q-status"></span>
+          <button class="btn btn-p" id="qNext" onclick="nextQ()" disabled>Nächste Frage →</button>
+        </div>
+      </div>
+
+      <!-- Result -->
+      <div id="qRes" style="display:none">
+        <div class="q-result">
+          <div class="res-emoji" id="rEmoji"></div>
+          <div class="res-score" id="rScore"></div>
+          <div class="res-of">von 18 Fragen richtig beantwortet</div>
+          <div class="res-grade" id="rGrade"></div>
+          <button class="btn-restart" onclick="restart()">Quiz wiederholen</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- Back to top -->
+<button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Nach oben">▲</button>
+
+<!-- ═══════════════════ JAVASCRIPT ═══════════════════ -->
+<script>
+/* ── Accordion ── */
+function toggle(header) {
+  const acc = header.parentElement;
+  acc.classList.toggle('open');
+}
+
+/* ── Back to top ── */
+window.addEventListener('scroll', () => {
+  document.getElementById('btt').classList.toggle('show', window.scrollY > 350);
+});
+
+/* ── Quiz data ── */
+const QS = [
+  {
+    q: "Was ist eine Transition Architecture?",
+    o: [
+      "Die angestrebte Zielarchitektur eines Unternehmens",
+      "Zwischenzustände auf dem Weg von Baseline zu Target Architecture",
+      "Eine spezielle ArchiMate-Schicht für Migrationsprojekte",
+      "Die aktuelle IST-Architektur des Unternehmens"
+    ],
+    a: 1,
+    e: "Transition Architecture = Zwischenzustände bei der Transformation. Baseline = IST-Architektur, Target = ZIEL-Architektur."
+  },
+  {
+    q: "Was ist der Hauptunterschied zwischen einer Capability und einem Geschäftsprozess?",
+    o: [
+      "Capabilities sind nur für IT-Bereiche relevant",
+      "Capability beschreibt das WAS (stabile Fähigkeit), Prozess beschreibt das WIE (Aktivitätsabfolge)",
+      "Geschäftsprozesse sind stabiler als Capabilities",
+      "Es gibt keinen wesentlichen Unterschied"
+    ],
+    a: 1,
+    e: "Capability = WAS (stabile Fähigkeit, unabhängig von Org-Struktur). Prozess = WIE (konkrete Abfolge von Aktivitäten)."
+  },
+  {
+    q: "Welche der folgenden Aussagen ist ein gültiges Architekturprinzip?",
+    o: [
+      "Google Chrome ist unser Standard-Webbrowser",
+      "Microsoft SQL Server ist unsere Standard-Datenbank-Technologie",
+      "Applikationen sollen modular aufgebaut sein",
+      "Apache Kafka ist unsere Standard-Event-Streaming-Plattform"
+    ],
+    a: 2,
+    e: "Architekturprinzipien sind qualitative Leitlinien (guide rails). A, B und D sind konkrete technische Standards — kein Prinzip."
+  },
+  {
+    q: "Welche 2 Dimensionen hat das Operating Model nach Ross et al. (2006)?",
+    o: [
+      "Agilität und Skalierbarkeit",
+      "Standardisierung und Integration",
+      "Automatisierung und Digitalisierung",
+      "Flexibilität und Effizienz"
+    ],
+    a: 1,
+    e: "Die 2 Dimensionen sind: Standardisierung (Einheitlichkeit der Prozesse) und Integration (geteilte Daten zwischen Einheiten)."
+  },
+  {
+    q: "Welche Beziehung in ArchiMate beschreibt eine zeitliche Auslösung / Abfolge?",
+    o: [
+      "Association",
+      "Serving",
+      "Triggering",
+      "Flow"
+    ],
+    a: 2,
+    e: "Triggering (ausgefüllter Pfeil) = zeitliche Abfolge und Auslösung. Flow = Daten-/Informationsfluss."
+  },
+  {
+    q: "Welche 3 Bestandteile hat ein Architekturprinzip nach dem Metamodell von Aier et al.?",
+    o: [
+      "Ziel, Maßnahme, Kontrolle",
+      "Statement, Rationale, Implications",
+      "Vision, Mission, Strategie",
+      "Problem, Lösung, Umsetzung"
+    ],
+    a: 1,
+    e: "Die 3 Bestandteile: Statement (Aussage), Rationale (Begründung) und Implications (Konsequenzen)."
+  },
+  {
+    q: "Wofür steht 'R' in den SMART-Kriterien für Architekturprinzipien nach Greefhorst & Proper?",
+    o: [
+      "Realistic",
+      "Reproducible",
+      "Relevant",
+      "Regulated"
+    ],
+    a: 2,
+    e: "SMART = Specific, Measurable, Achievable, Relevant, Time framed. R steht für Relevant."
+  },
+  {
+    q: "Was ist der Unterschied zwischen Viewpoint und View in ArchiMate?",
+    o: [
+      "Viewpoint ist konkret, View ist abstrakt",
+      "Viewpoint ist die Vorlage (Template), View ist die konkrete Darstellung auf Basis des Viewpoints",
+      "Beide Begriffe bedeuten dasselbe",
+      "Viewpoint bezieht sich nur auf den Business Layer"
+    ],
+    a: 1,
+    e: "Viewpoint = standardisierte Perspektive/Template (abstrakt). View = konkrete Darstellung einer Architektur auf Basis eines Viewpoints."
+  },
+  {
+    q: "Welches Operating Model nach Ross et al. hat HOHE Standardisierung und NIEDRIGE Integration?",
+    o: [
+      "Unification",
+      "Coordination",
+      "Diversification",
+      "Replication"
+    ],
+    a: 3,
+    e: "Replication = hohe Standardisierung + niedrige Integration. Unification = hoch/hoch. Diversification = niedrig/niedrig. Coordination = niedrig/hoch."
+  },
+  {
+    q: "Wie viele EAM-Tätigkeitsfelder gibt es laut Kursinhalt?",
+    o: ["4", "5", "6", "8"],
+    a: 2,
+    e: "Es gibt 6 EAM-Tätigkeitsfelder: Architekturentwicklung, Architekturanalyse, Entscheidungsfindung, Strategiedefinition, Kommunikation und Steuerung."
+  },
+  {
+    q: "Was enthält eine Architektur-Roadmap?",
+    o: [
+      "Nur eine Liste aller eingesetzten IT-Systeme",
+      "Den Übergang von IST zu ZIEL mit Maßnahmen, Zeitplänen, Verantwortlichkeiten und Transformationssequenz",
+      "Ausschließlich die strategischen Unternehmensziele",
+      "Eine Beschreibung der aktuellen IST-Architektur"
+    ],
+    a: 1,
+    e: "Architektur-Roadmap = Übergang IST→ZIEL + konkrete Maßnahmen + Zeitpläne + Verantwortlichkeiten + Sequenz der Transformationen."
+  },
+  {
+    q: "Welche Eigenschaft gehört NICHT zu einer korrekten Capability Map?",
+    o: [
+      "Geschäftsorientiert",
+      "Prozessorientiert",
+      "Redundanzfrei",
+      "Hierarchisch aufgebaut"
+    ],
+    a: 1,
+    e: "Capability Maps sind NICHT prozessorientiert — das ist ein wichtiges Unterscheidungsmerkmal. Sie sind geschäftsorientiert, stabil, hierarchisch, redundanzfrei und vollständig."
+  },
+  {
+    q: "Welcher ArchiMate-Layer ist für Anwendungen und Softwarekomponenten zuständig?",
+    o: [
+      "Business Layer",
+      "Strategy Layer",
+      "Application Layer",
+      "Technology Layer"
+    ],
+    a: 2,
+    e: "Application Layer = Application Component, Application Function, Application Service, Data Object — also Anwendungen und Softwarekomponenten."
+  },
+  {
+    q: "Was ist das Ziel von 'Transparenz schaffen' als EAM-Beweggrund?",
+    o: [
+      "Neue IT-Systeme einführen",
+      "Den aktuellen Architekturzustand dokumentieren und für alle sichtbar machen (Create Baseline)",
+      "Die Unternehmensstrategie neu definieren",
+      "Mitarbeiter über IT-Entscheidungen informieren"
+    ],
+    a: 1,
+    e: "'Transparenz schaffen' = 'Create Baseline' — den IST-Zustand der Architektur dokumentieren und für alle Stakeholder sichtbar machen."
+  },
+  {
+    q: "Welche Aussage ist KEIN Architekturprinzip?",
+    o: [
+      "Applikationen müssen Cloud-fähig sein",
+      "Kaufsoftware wird bevorzugt gegenüber Eigenentwicklung",
+      "Ein Wertstrom ist eine Ende-zu-Ende-Darstellung",
+      "Die Architektur sollte minimale Komplexität aufweisen"
+    ],
+    a: 2,
+    e: "'Ein Wertstrom ist eine Ende-zu-Ende-Darstellung' ist eine Definition, kein Architekturprinzip. Prinzipien sind Leitlinien für die Gestaltung."
+  },
+  {
+    q: "Welches ist das häufigste EAM-Organisationsmodell in der Praxis?",
+    o: [
+      "Zentralisiert",
+      "Dezentralisiert",
+      "Hybrid",
+      "Fully Outsourced"
+    ],
+    a: 2,
+    e: "Das hybride Modell (Mischung aus zentraler Steuerung und dezentraler Umsetzung) ist in der Praxis am häufigsten anzutreffen."
+  },
+  {
+    q: "Was beschreibt der Begriff 'Concern' in ArchiMate?",
+    o: [
+      "Eine technische Einschränkung der Modellierungssprache",
+      "Das Anliegen / Interesse eines Stakeholders, das durch eine View adressiert wird",
+      "Einen Fehler oder eine Schwachstelle in der Architektur",
+      "Eine Beziehung zwischen zwei ArchiMate-Elementen"
+    ],
+    a: 1,
+    e: "Concern = Anliegen eines Stakeholders, das durch eine View adressiert wird. Zusammenhang: Viewpoint → View → adressiert → Concern."
+  },
+  {
+    q: "Welche 3 Ebenen der Architekturbetrachtung gibt es im EAM?",
+    o: [
+      "Strategic, Tactical, Operational",
+      "Business, Application, Technology",
+      "Enterprise Level, Domain Level, Solution Level",
+      "Global, Regional, Local"
+    ],
+    a: 2,
+    e: "Die 3 Betrachtungsebenen: Enterprise Level (gesamtheitlich), Domain Level (spezifische Bereiche) und Solution Level (einzelne Systeme/Lösungen)."
+  }
+];
+
+/* ── Quiz state ── */
+let cur = 0, pts = 0, done = false;
+
+function render() {
+  const q = QS[cur];
+  document.getElementById('qCounter').textContent = `Frage ${cur + 1} von ${QS.length}`;
+  document.getElementById('qPts').textContent = `Punkte: ${pts}`;
+  document.getElementById('qFill').style.width = `${(cur / QS.length) * 100}%`;
+  document.getElementById('qText').textContent = q.q;
+
+  const ol = document.getElementById('qOpts');
+  ol.innerHTML = '';
+  ['A','B','C','D'].forEach((l, i) => {
+    const d = document.createElement('div');
+    d.className = 'q-opt';
+    d.innerHTML = `<span class="q-let">${l}</span><span>${q.o[i]}</span>`;
+    d.onclick = () => pick(i, d);
+    ol.appendChild(d);
+  });
+
+  const fb = document.getElementById('qFb');
+  fb.className = 'q-fb';
+  fb.innerHTML = '';
+  document.getElementById('qStatus').textContent = '';
+  const btn = document.getElementById('qNext');
+  btn.disabled = true;
+  btn.textContent = cur === QS.length - 1 ? 'Ergebnis anzeigen 🏆' : 'Nächste Frage →';
+  done = false;
+}
+
+function pick(idx, el) {
+  if (done) return;
+  done = true;
+  const q = QS[cur];
+  const opts = document.querySelectorAll('.q-opt');
+  opts.forEach(o => o.classList.add('off'));
+  const fb = document.getElementById('qFb');
+  if (idx === q.a) {
+    el.classList.add('ok');
+    pts++;
+    document.getElementById('qPts').textContent = `Punkte: ${pts}`;
+    fb.className = 'q-fb ok';
+    fb.innerHTML = `<strong>✅ Richtig!</strong> ${q.e}`;
+    document.getElementById('qStatus').textContent = '✅ Korrekt!';
+  } else {
+    el.classList.add('bad');
+    opts[q.a].classList.add('ok');
+    fb.className = 'q-fb bad';
+    fb.innerHTML = `<strong>❌ Falsch.</strong> Richtig wäre: <strong>${['A','B','C','D'][q.a]}</strong>. ${q.e}`;
+    document.getElementById('qStatus').textContent = '❌ Leider falsch';
+  }
+  document.getElementById('qNext').disabled = false;
+}
+
+function nextQ() {
+  cur++;
+  if (cur >= QS.length) showResult();
+  else render();
+}
+
+function showResult() {
+  document.getElementById('qMain').style.display = 'none';
+  document.getElementById('qRes').style.display = 'block';
+  document.getElementById('qFill').style.width = '100%';
+  const pct = Math.round((pts / QS.length) * 100);
+  document.getElementById('rScore').textContent = `${pts} / ${QS.length}`;
+  let emoji, txt, cls;
+  if (pct >= 90)      { emoji='🏆'; txt='Hervorragend! Sınavı kesinlikle geçersiniz!'; cls='ex'; }
+  else if (pct >= 75) { emoji='🎉'; txt='Sehr gut! Harika gidiyorsunuz!'; cls='good'; }
+  else if (pct >= 55) { emoji='👍'; txt='Gut! Biraz daha çalışmanız yeterli.'; cls='ok'; }
+  else                { emoji='📚'; txt='Konuları tekrar gözden geçirin!'; cls='bad'; }
+  document.getElementById('rEmoji').textContent = emoji;
+  document.getElementById('rGrade').textContent = txt;
+  document.getElementById('rGrade').className = `res-grade ${cls}`;
+}
+
+function restart() {
+  cur = 0; pts = 0; done = false;
+  document.getElementById('qMain').style.display = 'block';
+  document.getElementById('qRes').style.display = 'none';
+  render();
+}
+
+render();
+</script>
+</body>
+</html>
