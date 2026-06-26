@@ -23,7 +23,8 @@
       --c4: #059669;
       --c5: #d97706;
       --c6: #dc2626;
-      --c7: #7c3aed;
+      --c7: #0f766e;
+      --c8: #7c3aed;
     }
 
     body {
@@ -151,6 +152,8 @@
     .s6 .section-num    { background: var(--c6); }
     .s7 .section-header { border-color: var(--c7); }
     .s7 .section-num    { background: var(--c7); }
+    .s8 .section-header { border-color: var(--c8); }
+    .s8 .section-num    { background: var(--c8); }
 
     /* ── Accordion ── */
     .accordion {
@@ -425,7 +428,181 @@
     #btt.show { display: flex; }
     #btt:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(30,58,95,.5); }
 
-    /* Responsive */
+    /* ── Ezber: Sayı Özeti ── */
+    .num-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 10px;
+    }
+    @media (max-width: 560px) { .num-grid { grid-template-columns: repeat(2,1fr); } }
+    .num-card {
+      background: var(--primary);
+      color: #fff;
+      border-radius: 10px;
+      padding: 14px 10px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(30,58,95,.2);
+    }
+    .num-card .big  { font-size: 2.2rem; font-weight: 900; line-height: 1; }
+    .num-card .desc { font-size: .72rem; opacity: .85; margin-top: 4px; line-height: 1.3; }
+    .num-card.alt   { background: #0f766e; }
+    .num-card.alt2  { background: #7c3aed; }
+    .num-card.alt3  { background: #d97706; }
+    .num-card.alt4  { background: #dc2626; }
+    .num-card.alt5  { background: #2563eb; }
+
+    /* ── Ezber: Mnemonik ── */
+    .mn-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin-bottom: 8px;
+    }
+    .mn-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .mn-tag {
+      font-size: .7rem;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 20px;
+      background: var(--primary);
+      color: #fff;
+    }
+    .mn-head h4 { font-size: .9rem; font-weight: 700; color: var(--primary); }
+    .mn-body { font-size: .87rem; }
+    .mn-kw {
+      display: inline-block;
+      background: #eff6ff;
+      color: #1e40af;
+      font-weight: 700;
+      font-size: .82rem;
+      padding: 2px 8px;
+      border-radius: 5px;
+      margin: 2px 2px 2px 0;
+    }
+    .mn-sentence {
+      margin-top: 8px;
+      padding: 8px 12px;
+      background: #fef9c3;
+      border-radius: 6px;
+      font-style: italic;
+      font-size: .84rem;
+      color: #78350f;
+    }
+
+    /* ── Flashcards ── */
+    .fc-ui {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: 0 4px 16px rgba(0,0,0,.07);
+      overflow: hidden;
+      padding-bottom: 16px;
+    }
+    .fc-topbar {
+      padding: 13px 18px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .fc-info { font-size: .83rem; color: var(--muted); font-weight: 600; }
+    .fc-tag-badge {
+      font-size: .75rem; font-weight: 700;
+      padding: 3px 10px; border-radius: 20px;
+      background: #0f766e; color: #fff;
+    }
+    .fc-stage {
+      padding: 24px 20px 16px;
+      display: flex;
+      justify-content: center;
+    }
+    .fc-wrap {
+      perspective: 900px;
+      width: 100%;
+      max-width: 520px;
+      height: 190px;
+      cursor: pointer;
+    }
+    .fc-inner {
+      width: 100%; height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform .5s cubic-bezier(.4,0,.2,1);
+    }
+    .fc-inner.flipped { transform: rotateY(180deg); }
+    .fc-front, .fc-back {
+      position: absolute; width: 100%; height: 100%;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 24px;
+      text-align: center;
+    }
+    .fc-front {
+      background: linear-gradient(135deg, #1e3a5f, #0f766e);
+      color: #fff;
+    }
+    .fc-front .fc-q { font-size: .97rem; font-weight: 700; line-height: 1.5; }
+    .fc-front .fc-hint { font-size: .75rem; opacity: .7; margin-top: 12px; }
+    .fc-back {
+      background: #f0fdf4;
+      border: 2px solid #22c55e;
+      transform: rotateY(180deg);
+    }
+    .fc-back .fc-a {
+      font-size: .88rem;
+      color: #14532d;
+      line-height: 1.6;
+      white-space: pre-line;
+      font-weight: 500;
+    }
+    .fc-actions {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      padding: 0 20px;
+    }
+    .fc-btn {
+      padding: 9px 18px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: .85rem;
+      font-weight: 600;
+      cursor: pointer;
+      background: var(--card);
+      color: var(--text);
+      transition: all .18s;
+    }
+    .fc-btn:hover { background: #f1f5f9; border-color: #94a3b8; }
+    .fc-btn.primary { background: #0f766e; color: #fff; border-color: #0f766e; }
+    .fc-btn.primary:hover { background: #0d6460; }
+    .fc-btn:disabled { opacity: .35; cursor: default; }
+    .fc-progress {
+      display: flex; flex-wrap: wrap; justify-content: center;
+      gap: 4px; padding: 10px 20px 0;
+    }
+    .fc-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: #e2e8f0;
+      transition: background .2s;
+    }
+    .fc-dot.done { background: #22c55e; }
+    .fc-dot.curr { background: #0f766e; }
+
+    /* ── Responsive */
     @media (max-width: 600px) {
       .hero { padding: 26px 18px; }
       .hero h1 { font-size: 1.3rem; }
@@ -449,7 +626,8 @@
     <a href="#s4">4. ArchiMate</a>
     <a href="#s5">5. EAM-Aktivitäten</a>
     <a href="#s6">6. EAM-Design</a>
-    <a href="#s7">7. Quiz</a>
+    <a href="#s7">7. Ezber Rehberi</a>
+    <a href="#s8">8. Quiz</a>
   </div>
 </nav>
 
@@ -459,13 +637,14 @@
   <!-- Hero -->
   <div class="hero">
     <h1>Enterprise Architecture Management</h1>
-    <p>Sınav hazırlık çalışma sitesi — accordion kartlarda tüm konuları inceleyin, ardından 18 soruluk quiz ile kendinizi test edin.</p>
+    <p>Sınav hazırlık çalışma sitesi — accordion kartlarda tüm konuları inceleyin, mnemonikler &amp; flashcard'larla ezberleyin, ardından quiz ile kendinizi test edin.</p>
     <div class="hero-tags">
       <span class="hero-tag">Architekturzustände</span>
       <span class="hero-tag">Business Architecture</span>
-      <span class="hero-tag">Architekturprinzipien</span>
       <span class="hero-tag">ArchiMate</span>
       <span class="hero-tag">EAM-Design</span>
+      <span class="hero-tag">Mnemonikler</span>
+      <span class="hero-tag">25 Flashcard</span>
       <span class="hero-tag">18 Quiz-Fragen</span>
     </div>
   </div>
@@ -1089,10 +1268,212 @@
     </div>
   </section>
 
-  <!-- ══════════════ 7. Quiz ══════════════ -->
+  <!-- ══════════════ 7. Ezber Rehberi ══════════════ -->
   <section class="section s7" id="s7">
     <div class="section-header">
       <div class="section-num">7</div>
+      <h2>Ezber Rehberi</h2>
+    </div>
+
+    <!-- Sayı Özeti -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggle(this)">
+        <span class="accordion-title">Tüm Sayılar Bir Bakışta — Kaç Tane?</span>
+        <span class="accordion-icon">▾</span>
+      </div>
+      <div class="accordion-body">
+        <div class="num-grid" style="margin-top:8px">
+          <div class="num-card"><div class="big">3</div><div class="desc">Architektur-<br>zustände</div></div>
+          <div class="num-card alt5"><div class="big">3</div><div class="desc">EAM-Ziele<br>(TKS)</div></div>
+          <div class="num-card alt"><div class="big">3</div><div class="desc">Betrachtungs-<br>ebenen</div></div>
+          <div class="num-card alt5"><div class="big">5</div><div class="desc">Capability Map<br>Eigenschaften</div></div>
+          <div class="num-card alt2"><div class="big">6</div><div class="desc">Kuehn-<br>Perspektiven</div></div>
+          <div class="num-card alt"><div class="big">3</div><div class="desc">AP-Bestandteile<br>(SRI)</div></div>
+          <div class="num-card alt3"><div class="big">4</div><div class="desc">AP-Treiber<br>(Greefhorst)</div></div>
+          <div class="num-card alt4"><div class="big">5</div><div class="desc">Sandkuhl-<br>Anforderungen</div></div>
+          <div class="num-card alt2"><div class="big">4</div><div class="desc">ArchiMate-<br>Layer (SBAT)</div></div>
+          <div class="num-card alt"><div class="big">3</div><div class="desc">Aspekte<br>pro Layer</div></div>
+          <div class="num-card alt3"><div class="big">6</div><div class="desc">EAM-Tätig-<br>keitsfelder</div></div>
+          <div class="num-card alt4"><div class="big">4</div><div class="desc">Operating Model<br>Typen</div></div>
+          <div class="num-card alt5"><div class="big">6</div><div class="desc">EAM-Gestaltungs-<br>dimensionen</div></div>
+          <div class="num-card alt"><div class="big">3</div><div class="desc">Org-Modelle<br>für EAM</div></div>
+          <div class="num-card alt2"><div class="big">5</div><div class="desc">EAM-Einführungs-<br>schritte</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mnemonikler -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggle(this)">
+        <span class="accordion-title">Mnemonikler &amp; Kısaltmalar — Bölüm 1 &amp; 2</span>
+        <span class="accordion-icon">▾</span>
+      </div>
+      <div class="accordion-body" style="margin-top:8px">
+
+        <div class="mn-card">
+          <div class="mn-head"><span class="mn-tag" style="background:#2563eb">Grundlagen</span><h4>3 Architekturzustände — "BTT"</h4></div>
+          <div class="mn-body">
+            <span class="mn-kw">B</span>aseline → <span class="mn-kw">T</span>ransition → <span class="mn-kw">T</span>arget
+            <div class="mn-sentence">"Bevor Transition kommt, ist Target das Ziel."</div>
+            <div style="margin-top:8px;font-size:.82rem;color:var(--muted)">IST-Zustand → Zwischenzustände → ZIEL-Zustand</div>
+          </div>
+        </div>
+
+        <div class="mn-card">
+          <div class="mn-head"><span class="mn-tag" style="background:#2563eb">Grundlagen</span><h4>3 EAM-Ziele — "TKS"</h4></div>
+          <div class="mn-body">
+            <span class="mn-kw">T</span>ransparenz schaffen &nbsp;·&nbsp; <span class="mn-kw">K</span>omplexität beherrschen &nbsp;·&nbsp; <span class="mn-kw">S</span>trategie umsetzen
+            <div class="mn-sentence">"Total Klare Strategie"</div>
+          </div>
+        </div>
+
+        <div class="mn-card">
+          <div class="mn-head"><span class="mn-tag" style="background:#2563eb">Grundlagen</span><h4>3 Betrachtungsebenen — "EDS"</h4></div>
+          <div class="mn-body">
+            <span class="mn-kw">E</span>nterprise &nbsp;·&nbsp; <span class="mn-kw">D</span>omain &nbsp;·&nbsp; <span class="mn-kw">S</span>olution
+            <div class="mn-sentence">"Erst das Dach, dann die Schicht." — Von groß nach klein.</div>
+          </div>
+        </div>
+
+        <div class="mn-card">
+          <div class="mn-head"><span class="mn-tag" style="background:#7c3aed">Business Arch.</span><h4>5 Capability Map-Eigenschaften — "GSHRV"</h4></div>
+          <div class="mn-body">
+            <span class="mn-kw">G</span>eschäftsorientiert &nbsp;·&nbsp; <span class="mn-kw">S</span>tabil &nbsp;·&nbsp; <span class="mn-kw">H</span>ierarchisch &nbsp;·&nbsp; <span class="mn-kw">R</span>edundanzfrei &nbsp;·&nbsp; <span class="mn-kw">V</span>ollständig
+            <div class="mn-sentence">"Gute Strukturen Haben Richtig Viel Wert."</div>
+          </div>
+        </div>
+
+        <div class="mn-card">
+          <div class="mn-head"><span class="mn-tag" style="background:#7c3aed">Business Arch.</span><h4>6 Kuehn-Perspektiven — "OI-PI-SS"</h4></div>
+          <div class="mn-body">
+            <span class="mn-kw">O</span>rganization &nbsp;·&nbsp; <span class="mn-kw">I</span>nformation &nbsp;·&nbsp; <span class="mn-kw">P</span>roducts &amp; Services &nbsp;·&nbsp; <span class="mn-kw">I</span>nitiatives &nbsp;·&nbsp; <span class="mn-kw">S</span>takeholders &nbsp;·&nbsp; <span class="mn-kw">S</span>trategy
+            <div class="mn-sentence">"Organisationen Informieren Produktiv Ihre Stakeholder Strategisch."</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggle(this)">
+        <span class="accordion-title">Mnemonikler &amp; Kısaltmalar — Bölüm 3, 4, 5 &amp; 6</span>
+        <span class="accordion-icon">▾</span>
+      </div>
+      <div class="accordion-body" style="margin-top:8px">
+
+        <div class="mn-card">
+          <div class="mn-head"><span class="mn-tag" style="background:#0891b2">Prinzipien</span><h4>3 AP-Bestandteile — "SRI"</h4></div>
+          <div class="mn-body">
+            <span class="mn-kw">S</span>tatement &nbsp;·&nbsp; <span class="mn-kw">R</span>ationale &nbsp;·&nbsp; <span class="mn-kw">I</span>mplications
+            <div class="mn-sentence">"SRI Lanka hat tolle Architekturprinzipien." 🏝️</div>
+          </div>
+        </div>
+
+        <div class="mn-card">
+          <div class="mn-head"><span class="mn-tag" style="background:#0891b2">Prinzipien</span><h4>4 Treiber (Greefhorst &amp; Proper) — "ZWPR"</h4></div>
+          <div class="mn-body">
+            <span class="mn-kw">Z</span>iele &amp; Strategien &nbsp;·&nbsp; <span class="mn-kw">W</span>erte &nbsp;·&nbsp; <span class="mn-kw">P</span>robleme &nbsp;·&nbsp; <span class="mn-kw">R</span>ahmenbedingungen
+            <div class="mn-sentence">"Zuverlässige Werte Prägen Rahmenbedingungen."</div>
+          </div>
+        </div>
+
+        <div class="mn-card">
+          <div class="mn-head"><span class="mn-tag" style="background:#0891b2">Prinzipien</span><h4>5 Anforderungen Sandkuhl — "ZASPM"</h4></div>
+          <div class="mn-body">
+            <span class="mn-kw">Z</span>ielorientierung &nbsp;·&nbsp; <span class="mn-kw">A</span>ussagekräftige Beschreibung &nbsp;·&nbsp; <span class="mn-kw">S</span>orgfältige Kommunikation &nbsp;·&nbsp; <span class="mn-kw">P</span>rozessverankerung &nbsp;·&nbsp; <span class="mn-kw">M</span>essung
+            <div class="mn-sentence">"Zuverlässige Architekten Sind Professionell &amp; Messbar."</div>
+          </div>
+        </div>
+
+        <div class="mn-card">
+          <div class="mn-head"><span class="mn-tag" style="background:#059669">ArchiMate</span><h4>4 Layer — "SBAT"</h4></div>
+          <div class="mn-body">
+            <span class="mn-kw">S</span>trategy &nbsp;·&nbsp; <span class="mn-kw">B</span>usiness &nbsp;·&nbsp; <span class="mn-kw">A</span>pplication &nbsp;·&nbsp; <span class="mn-kw">T</span>echnology
+            <div class="mn-sentence">"Super Business-Apps Technologisieren!"</div>
+          </div>
+        </div>
+
+        <div class="mn-card">
+          <div class="mn-head"><span class="mn-tag" style="background:#d97706">EAM-Aktivitäten</span><h4>6 Tätigkeitsfelder — "EA-ES-KS"</h4></div>
+          <div class="mn-body">
+            <span class="mn-kw">E</span>ntwicklung &nbsp;·&nbsp; <span class="mn-kw">A</span>nalyse &nbsp;·&nbsp; <span class="mn-kw">E</span>ntscheidung &nbsp;·&nbsp; <span class="mn-kw">S</span>trategie &nbsp;·&nbsp; <span class="mn-kw">K</span>ommunikation &nbsp;·&nbsp; <span class="mn-kw">S</span>teuerung
+            <div class="mn-sentence">"Echte Architekten Entwickeln Strategisch Kompetente Systeme."</div>
+          </div>
+        </div>
+
+        <div class="mn-card">
+          <div class="mn-head"><span class="mn-tag" style="background:#d97706">EAM-Aktivitäten</span><h4>4 Operating Models — Matrix-Trick</h4></div>
+          <div class="mn-body">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:.82rem;margin-bottom:6px">
+              <div style="background:#fef9c3;padding:7px;border-radius:6px;text-align:center"><strong>Diversification</strong><br><small>Std↓ Int↓</small></div>
+              <div style="background:#dbeafe;padding:7px;border-radius:6px;text-align:center"><strong>Coordination</strong><br><small>Std↓ Int↑</small></div>
+              <div style="background:#dcfce7;padding:7px;border-radius:6px;text-align:center"><strong>Replication</strong><br><small>Std↑ Int↓</small></div>
+              <div style="background:#f3e8ff;padding:7px;border-radius:6px;text-align:center"><strong>Unification</strong><br><small>Std↑ Int↑</small></div>
+            </div>
+            <div class="mn-sentence">"D-C-R-U: Von links-unten im Uhrzeigersinn."<br>Diversification = Chaos, Unification = Einheit.</div>
+          </div>
+        </div>
+
+        <div class="mn-card">
+          <div class="mn-head"><span class="mn-tag" style="background:#dc2626">EAM-Design</span><h4>6 Gestaltungsdimensionen — "MAIWPO"</h4></div>
+          <div class="mn-body">
+            <span class="mn-kw">M</span>otivation &nbsp;·&nbsp; <span class="mn-kw">A</span>ngebot &nbsp;·&nbsp; <span class="mn-kw">I</span>nhalte &nbsp;·&nbsp; <span class="mn-kw">W</span>erkzeuge &nbsp;·&nbsp; <span class="mn-kw">P</span>rozesse &nbsp;·&nbsp; <span class="mn-kw">O</span>rganisation
+            <div class="mn-sentence">"Manche Architekten Ignorieren Wichtige Prozess-Optimierungen."</div>
+          </div>
+        </div>
+
+        <div class="mn-card">
+          <div class="mn-head"><span class="mn-tag" style="background:#dc2626">EAM-Design</span><h4>5 Einführungsschritte — "AZGTU"</h4></div>
+          <div class="mn-body">
+            <span class="mn-kw">A</span>nalyse &nbsp;·&nbsp; <span class="mn-kw">Z</span>ieldefinition &nbsp;·&nbsp; <span class="mn-kw">G</span>overnance &nbsp;·&nbsp; <span class="mn-kw">T</span>ooling &nbsp;·&nbsp; <span class="mn-kw">U</span>msetzung
+            <div class="mn-sentence">"Alle Ziele Gut Taktisch Umsetzen."</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Flashcards -->
+    <div class="accordion open">
+      <div class="accordion-header" onclick="toggle(this)">
+        <span class="accordion-title">Flashcard Modu — Tıkla, çevir, ezberle! (25 Kart)</span>
+        <span class="accordion-icon">▾</span>
+      </div>
+      <div class="accordion-body">
+        <div class="fc-ui" style="margin-top:10px">
+          <div class="fc-topbar">
+            <span class="fc-info" id="fcInfo">Kart 1 / 25</span>
+            <span class="fc-tag-badge" id="fcTag">Grundlagen</span>
+          </div>
+          <div class="fc-stage">
+            <div class="fc-wrap" onclick="flipCard()">
+              <div class="fc-inner" id="fcInner">
+                <div class="fc-front">
+                  <div class="fc-q" id="fcQ"></div>
+                  <div class="fc-hint">Cevabı görmek için kartı tıkla</div>
+                </div>
+                <div class="fc-back">
+                  <div class="fc-a" id="fcA"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="fc-progress" id="fcDots"></div>
+          <div class="fc-actions" style="margin-top:14px">
+            <button class="fc-btn" id="fcPrev" onclick="fcMove(-1)">◀ Önceki</button>
+            <button class="fc-btn primary" onclick="fcShuffle()">Karıştır 🔀</button>
+            <button class="fc-btn" id="fcNext" onclick="fcMove(1)">Sonraki ▶</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ══════════════ 8. Quiz ══════════════ -->
+  <section class="section s8" id="s8">
+    <div class="section-header">
+      <div class="section-num">8</div>
       <h2>Quiz &mdash; Wissen testen</h2>
     </div>
 
@@ -1147,6 +1528,77 @@ function toggle(header) {
 window.addEventListener('scroll', () => {
   document.getElementById('btt').classList.toggle('show', window.scrollY > 350);
 });
+
+/* ── Flashcard data ── */
+const FC = [
+  { f:"3 Architekturzustände?", b:"Baseline (IST)\n→ Transition (Zwischenzustand)\n→ Target (ZIEL)\n\nMnemonik: BTT", t:"Grundlagen" },
+  { f:"3 EAM-Ziele?", b:"TKS:\n① Transparenz schaffen — Create Baseline\n② Komplexität beherrschen — Manage Complexity\n③ Strategie umsetzen — Drive Transformation", t:"Grundlagen" },
+  { f:"3 Ebenen der Architekturbetrachtung?", b:"EDS (groß → klein):\nEnterprise Level\nDomain Level\nSolution Level", t:"Grundlagen" },
+  { f:"Was enthält eine Architektur-Roadmap?", b:"Übergang IST → ZIEL\n\n• Konkrete Maßnahmen\n• Zeitpläne\n• Verantwortlichkeiten\n• Transformationssequenz", t:"Grundlagen" },
+  { f:"Capability vs. Geschäftsprozess?", b:"Capability = WAS\n(stabile Fähigkeit, unabhängig von Org-Struktur)\n\nProzess = WIE\n(konkrete Abfolge von Aktivitäten)", t:"Business Arch." },
+  { f:"5 Eigenschaften einer Capability Map?", b:"GSHRV:\nGeschäftsorientiert · Stabil\nHierarchisch · Redundanzfrei · Vollständig\n\n'Gute Strukturen Haben Richtig Viel Wert'", t:"Business Arch." },
+  { f:"Was ist ein Value Stream?", b:"End-to-End-Darstellung der Werterbringung\nfür einen Stakeholder\n\n• Verb-Noun-Syntax\n• Ergebnisorientiert (nicht prozessorientiert)\n• Alle Szenarien abgedeckt", t:"Business Arch." },
+  { f:"6 Kuehn-Perspektiven\n(neben Capabilities & Value Streams)?", b:"OI-PI-SS:\nOrganization · Information\nProducts & Services · Initiatives\nStakeholders · Strategy", t:"Business Arch." },
+  { f:"3 Bestandteile eines Architekturprinzips?", b:"SRI:\nStatement — die Aussage\nRationale — Begründung (Warum?)\nImplications — Konsequenzen (Was heißt das?)\n\n'Sri Lanka' 🏝️", t:"Architekturprinz." },
+  { f:"4 Treiber für Architekturprinzipien\n(Greefhorst & Proper)?", b:"ZWPR:\nZiele & Strategien · Werte\nProbleme · Rahmenbedingungen\n\n+ Risiken und Chancen", t:"Architekturprinz." },
+  { f:"SMART-Kriterien für Architekturprinzipien?", b:"S — Specific (Spezifisch)\nM — Measurable (Messbar)\nA — Achievable (Erreichbar)\nR — Relevant\nT — Time framed (Zeitlich begrenzt)", t:"Architekturprinz." },
+  { f:"5 Anforderungen nach Sandkuhl (2015)?", b:"ZASPM:\nZielorientierung\nAussagekräftige Beschreibung\nSorgfältige Kommunikation\nProzessverankerung\nMessung des Erfüllungsgrads", t:"Architekturprinz." },
+  { f:"Prinzip ODER kein Prinzip?\n'Kaufsoftware bevorzugen'\nvs.\n'MS SQL Server ist Standard'", b:"✅ PRINZIP:\n'Kaufsoftware bevorzugen' — qualitative Leitlinie\n\n❌ KEIN PRINZIP:\n'MS SQL Server' — konkreter techn. Standard", t:"Architekturprinz." },
+  { f:"4 ArchiMate-Layer (Hauptlayers)?", b:"SBAT (oben → unten):\nStrategy · Business\nApplication · Technology\n\n+ Physical & Implementation Layer", t:"ArchiMate" },
+  { f:"3 Aspekte pro Layer in ArchiMate?", b:"ABP:\nActive Structure → Wer führt aus?\nBehavior → Was wird getan?\nPassive Structure → Womit / Worauf?", t:"ArchiMate" },
+  { f:"Triggering vs. Flow (ArchiMate)?", b:"Triggering (→ ausgefüllter Pfeil):\nZeitliche Abfolge / Auslösung\n\nFlow (─→ offener Pfeil + Linie):\nDaten- / Informationsfluss", t:"ArchiMate" },
+  { f:"Viewpoint / View / Concern — Unterschied?", b:"Viewpoint = Template / Vorlage (abstrakt)\n\nView = konkrete Darstellung\n(auf Basis eines Viewpoints)\n\nConcern = Anliegen eines Stakeholders", t:"ArchiMate" },
+  { f:"6 EAM-Tätigkeitsfelder?", b:"EA-ES-KS:\n① Architekturentwicklung\n② Architekturanalyse\n③ Entscheidungsfindung\n④ Strategiedefinition\n⑤ EAM-Kommunikation\n⑥ EAM-Steuerung", t:"EAM-Aktivitäten" },
+  { f:"4 Operating Model Typen (Ross 2006)?", b:"Std↓ Int↓ → Diversification\nStd↓ Int↑ → Coordination\nStd↑ Int↓ → Replication\nStd↑ Int↑ → Unification\n\nMnemonik: D-C-R-U", t:"EAM-Aktivitäten" },
+  { f:"2 Dimensionen des Operating Models?", b:"① Standardisierung\n→ Wie einheitlich sind Prozesse?\n\n② Integration\n→ Wie stark sind Einheiten durch\n   geteilte Daten verknüpft?", t:"EAM-Aktivitäten" },
+  { f:"6 EAM-Gestaltungsdimensionen?", b:"MAIWPO:\nMotivation · Angebot · Inhalte\nWerkzeuge · Prozesse · Organisation\n\n'Manche Architekten Ignorieren\n Wichtige Prozess-Optimierungen'", t:"EAM-Design" },
+  { f:"3 EAM-Organisationsmodelle?", b:"Zentralisiert\n→ eine zentrale EA-Abteilung\n\nDezentralisiert\n→ EA-Experten je Business-Unit\n\nHybrid ★\n→ häufigster Ansatz in der Praxis", t:"EAM-Design" },
+  { f:"EAM innerhalb vs. außerhalb IT?", b:"Innerhalb IT:\n+ Bessere IT-Integration\n− Business-Ferne\n\nAußerhalb IT:\n+ Mehr Business-Nähe\n− IT-Distanz", t:"EAM-Design" },
+  { f:"5 Schritte: EAM-Einführung?", b:"AZGTU:\n① Analyse der aktuellen Situation\n② Zieldefinition & Strategie\n③ Governance & Prozesse etablieren\n④ Tooling & Methoden auswählen\n⑤ Schrittweise Umsetzung", t:"EAM-Design" },
+  { f:"Was unterscheidet Architekturprinzip\nvon techn. Standard / Definition / Methodik?", b:"Architekturprinzip:\n→ Qualitative Leitlinie ('guide rail')\n→ Allgemein, richtungsweisend\n\nKEIN Prinzip:\n→ Konkretes Tool/Produkt (Standard)\n→ 'Was ist X' (Definition)\n→ 'Wie macht man X' (Methodik)", t:"Architekturprinz." },
+];
+
+let fcIdx = 0, fcFlipped = false;
+
+function fcRender() {
+  const c = FC[fcIdx];
+  document.getElementById('fcQ').textContent = c.f;
+  document.getElementById('fcA').textContent = c.b;
+  document.getElementById('fcInfo').textContent = `Kart ${fcIdx+1} / ${FC.length}`;
+  document.getElementById('fcTag').textContent = c.t;
+  fcFlipped = false;
+  document.getElementById('fcInner').classList.remove('flipped');
+  document.getElementById('fcPrev').disabled = fcIdx === 0;
+  document.getElementById('fcNext').disabled = fcIdx === FC.length - 1;
+  const dots = document.getElementById('fcDots');
+  dots.innerHTML = '';
+  FC.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'fc-dot' + (i === fcIdx ? ' curr' : (i < fcIdx ? ' done' : ''));
+    dots.appendChild(d);
+  });
+}
+
+function flipCard() {
+  fcFlipped = !fcFlipped;
+  document.getElementById('fcInner').classList.toggle('flipped', fcFlipped);
+}
+
+function fcMove(dir) {
+  fcIdx = Math.max(0, Math.min(FC.length-1, fcIdx+dir));
+  fcRender();
+}
+
+function fcShuffle() {
+  for (let i = FC.length-1; i > 0; i--) {
+    const j = Math.floor(Math.random()*(i+1));
+    [FC[i], FC[j]] = [FC[j], FC[i]];
+  }
+  fcIdx = 0;
+  fcRender();
+}
+
+fcRender();
 
 /* ── Quiz data ── */
 const QS = [
