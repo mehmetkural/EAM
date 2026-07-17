@@ -25,6 +25,7 @@
       --c6: #dc2626;
       --c7: #0f766e;
       --c8: #7c3aed;
+      --c9: #be185d;
     }
 
     body {
@@ -154,6 +155,8 @@
     .s7 .section-num    { background: var(--c7); }
     .s8 .section-header { border-color: var(--c8); }
     .s8 .section-num    { background: var(--c8); }
+    .s9 .section-header { border-color: var(--c9); }
+    .s9 .section-num    { background: var(--c9); }
 
     /* ── Accordion ── */
     .accordion {
@@ -653,10 +656,11 @@
     <a href="#s2">2. Business Architecture</a>
     <a href="#s3">3. Architekturprinzipien</a>
     <a href="#s4">4. ArchiMate</a>
-    <a href="#s5">5. EAM-Aktivitäten</a>
-    <a href="#s6">6. EAM-Design</a>
-    <a href="#s7">7. Ezber Rehberi</a>
-    <a href="#s8">8. Quiz</a>
+    <a href="#s5">5. EAM-Rahmenwerke</a>
+    <a href="#s6">6. EAM-Aktivitäten</a>
+    <a href="#s7">7. EAM-Design</a>
+    <a href="#s8">8. Ezber Rehberi</a>
+    <a href="#s9">9. Quiz</a>
   </div>
 </nav>
 
@@ -824,6 +828,22 @@
           <li><strong>Redundanzfrei</strong> — jede Fähigkeit nur einmal</li>
           <li><strong>Vollständig</strong> — alle relevanten Fähigkeiten abgedeckt</li>
         </ul>
+      </div>
+    </div>
+
+    <!-- Vier Szenarien Capability Map -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggle(this)">
+        <span class="accordion-title">4 Szenarien für eine Capability Map <span class="exam-badges"><span class="exam-badge yss24">SS24</span></span></span>
+        <span class="accordion-icon">▾</span>
+      </div>
+      <div class="accordion-body">
+        <div class="g2" style="margin-top:8px">
+          <div class="card"><h4>🔗 IT Business Alignment</h4><p>Geschäftsfähigkeiten mit IT-Unterstützung abgleichen</p></div>
+          <div class="card"><h4>📋 Project Portfolio Planning</h4><p>Projekte anhand von Capabilities priorisieren</p></div>
+          <div class="card"><h4>⚙️ Business Process Optimization</h4><p>Prozesse anhand betroffener Fähigkeiten optimieren</p></div>
+          <div class="card"><h4>✅ Compliance Management</h4><p>Regulatorische Anforderungen Capabilities zuordnen</p></div>
+        </div>
       </div>
     </div>
 
@@ -1126,12 +1146,96 @@
         </div>
       </div>
     </div>
+
+    <!-- Business Support Matrix -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggle(this)">
+        <span class="accordion-title">Business Support Matrix <span class="exam-badges"><span class="exam-badge yss24">SS24</span></span></span>
+        <span class="accordion-icon">▾</span>
+      </div>
+      <div class="accordion-body">
+        <div class="hbox hbox-def" style="margin-top:8px">
+          <strong>Dimensionen:</strong> Geschäftsprozesse vs. unterstützende IT-Systeme
+        </div>
+        <div class="lbl">Typische Fragen</div>
+        <ul>
+          <li>Welche Anwendungen unterstützen welche Geschäftsprozesse?</li>
+          <li>Wo gibt es Redundanzen in der IT-Unterstützung?</li>
+          <li>Wo fehlen IT-Lösungen für Geschäftsprozesse?</li>
+          <li>Welche Systeme müssen bei einer Prozessänderung angepasst werden?</li>
+        </ul>
+      </div>
+    </div>
   </section>
 
-  <!-- ══════════════ 5. EAM-Aktivitäten ══════════════ -->
+  <!-- ══════════════ 5. EAM-Rahmenwerke ══════════════ -->
   <section class="section s5" id="s5">
     <div class="section-header">
       <div class="section-num">5</div>
+      <h2>EAM-Rahmenwerke</h2>
+    </div>
+
+    <!-- 3 EAM-Rahmenwerke -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggle(this)">
+        <span class="accordion-title">3 EAM-Rahmenwerke (TOGAF, Zachman, ArchiMate) <span class="exam-badges"><span class="exam-badge yss24">SS24</span></span></span>
+        <span class="accordion-icon">▾</span>
+      </div>
+      <div class="accordion-body">
+        <table>
+          <tr><th>Rahmenwerk</th><th>Beschreibung</th></tr>
+          <tr><td><strong>TOGAF</strong></td><td>Standardisiertes Framework mit ADM-Methode zur Architekturentwicklung</td></tr>
+          <tr><td><strong>Zachman Framework</strong></td><td>Klassifiziert Architekturartefakte nach Stakeholder-Perspektiven</td></tr>
+          <tr><td><strong>ArchiMate</strong></td><td>Modellierungssprache zur visuellen Darstellung von Architekturen</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- 4 Komponenten EAM-Rahmenwerk -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggle(this)">
+        <span class="accordion-title">4 typische Komponenten eines EAM-Rahmenwerks (Jung &amp; Frauenholz 2021) <span class="exam-badges"><span class="exam-badge y2324">WS23/24 · 4P</span></span></span>
+        <span class="accordion-icon">▾</span>
+      </div>
+      <div class="accordion-body">
+        <div class="hbox hbox-warn" style="margin-top:8px">
+          <strong>Hinweis:</strong> Für diese Frage liegt uns keine gesicherte Musterlösung vor — bitte mit den eigenen Vorlesungsunterlagen (Jung &amp; Frauenholz 2021) abgleichen, bevor Sie sich darauf verlassen.
+        </div>
+      </div>
+    </div>
+
+    <!-- ADM Phasen -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggle(this)">
+        <span class="accordion-title">TOGAF ADM: Phasen A&ndash;H <span class="exam-badges"><span class="exam-badge y2324">WS23/24 · 10P</span><span class="exam-badge yss24">SS24</span></span></span>
+        <span class="accordion-icon">▾</span>
+      </div>
+      <div class="accordion-body">
+        <div class="hbox hbox-def" style="margin-top:8px">
+          <strong>Preliminary Phase</strong> — Architekturrahmen und Prinzipien definieren (vor Phase A)
+        </div>
+        <table style="margin-top:10px">
+          <tr><th>Phase</th><th>Fokus</th></tr>
+          <tr><td><strong>A: Architecture Vision</strong></td><td>Zielarchitektur und Business Case erstellen</td></tr>
+          <tr><td><strong>B: Business Architecture</strong></td><td>Geschäftsarchitektur entwickeln</td></tr>
+          <tr><td><strong>C: Information Systems Architecture</strong></td><td>Daten- und Applikationsarchitektur modellieren</td></tr>
+          <tr><td><strong>D: Technology Architecture</strong></td><td>Technologische Architektur planen</td></tr>
+          <tr><td><strong>E: Opportunities and Solutions</strong></td><td>Projekte und Maßnahmen festlegen</td></tr>
+          <tr><td><strong>F: Migration Planning</strong></td><td>Implementierungsplanung</td></tr>
+          <tr><td><strong>G: Implementation Governance</strong></td><td>Umsetzung überwachen</td></tr>
+          <tr><td><strong>H: Architecture Change Management</strong></td><td>Architektur weiterentwickeln</td></tr>
+        </table>
+        <div class="hbox hbox-warn" style="margin-top:10px">
+          <strong>Requirements Management</strong> steht im Zentrum aller Phasen (A&ndash;H) — kontinuierliche Anforderungserfassung &amp; -prüfung während des gesamten Zyklus.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ 6. EAM-Aktivitäten ══════════════ -->
+  <section class="section s6" id="s6">
+    <div class="section-header">
+      <div class="section-num">6</div>
       <h2>EAM-Aktivitäten (Tätigkeitsfelder)</h2>
     </div>
 
@@ -1219,10 +1323,10 @@
     </div>
   </section>
 
-  <!-- ══════════════ 6. EAM-Design ══════════════ -->
-  <section class="section s6" id="s6">
+  <!-- ══════════════ 7. EAM-Design ══════════════ -->
+  <section class="section s7" id="s7">
     <div class="section-header">
-      <div class="section-num">6</div>
+      <div class="section-num">7</div>
       <h2>EAM-Design</h2>
     </div>
 
@@ -1306,10 +1410,10 @@
     </div>
   </section>
 
-  <!-- ══════════════ 7. Ezber Rehberi ══════════════ -->
-  <section class="section s7" id="s7">
+  <!-- ══════════════ 8. Ezber Rehberi ══════════════ -->
+  <section class="section s8" id="s8">
     <div class="section-header">
-      <div class="section-num">7</div>
+      <div class="section-num">8</div>
       <h2>Ezber Rehberi</h2>
     </div>
 
@@ -1508,10 +1612,10 @@
 
   </section>
 
-  <!-- ══════════════ 8. Quiz ══════════════ -->
-  <section class="section s8" id="s8">
+  <!-- ══════════════ 9. Quiz ══════════════ -->
+  <section class="section s9" id="s9">
     <div class="section-header">
-      <div class="section-num">8</div>
+      <div class="section-num">9</div>
       <h2>Quiz &mdash; Wissen testen</h2>
     </div>
 
