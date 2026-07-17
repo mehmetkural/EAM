@@ -178,6 +178,34 @@
     .accordion-header:hover { background: #f8fafc; }
     .accordion-title { font-weight: 600; font-size: .93rem; color: var(--primary); }
     .accordion-icon { font-size: 1.1rem; color: var(--muted); transition: transform .3s; }
+
+    /* ── Exam badges ── */
+    .exam-badges { display: inline-flex; gap: 4px; flex-wrap: wrap; vertical-align: middle; margin-left: 8px; }
+    .exam-badge {
+      display: inline-block;
+      font-size: .66rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 20px;
+      white-space: nowrap;
+      letter-spacing: .01em;
+    }
+    .exam-badge.y2324 { background: #dbeafe; color: #1e40af; }
+    .exam-badge.y2526 { background: #fef3c7; color: #92400e; }
+    .exam-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 16px;
+      margin-bottom: 24px;
+      font-size: .82rem;
+      color: var(--muted);
+    }
+    .exam-legend strong { color: var(--text); }
     .accordion.open .accordion-icon { transform: rotate(180deg); }
     .accordion-body {
       max-height: 0;
@@ -649,6 +677,14 @@
     </div>
   </div>
 
+  <!-- Sınav Geçmişi Legend -->
+  <div class="exam-legend">
+    <strong>📋 Sınav Geçmişi:</strong>
+    <span><span class="exam-badge y2324">WS23/24</span> ile işaretli konular o dönemin sınavında çıktı</span>
+    <span><span class="exam-badge y2526">WS25/26</span> ile işaretli konular o dönemin sınavında çıktı</span>
+    <span>Puan, ilgili alt sorunun (Teilaufgabe) değeridir.</span>
+  </div>
+
   <!-- ══════════════ 1. Grundlagen ══════════════ -->
   <section class="section s1" id="s1">
     <div class="section-header">
@@ -659,7 +695,7 @@
     <!-- Architekturzustände -->
     <div class="accordion">
       <div class="accordion-header" onclick="toggle(this)">
-        <span class="accordion-title">Architekturzustände (3 Stück)</span>
+        <span class="accordion-title">Architekturzustände (3 Stück) <span class="exam-badges"><span class="exam-badge y2324">WS23/24 · 3P</span></span></span>
         <span class="accordion-icon">▾</span>
       </div>
       <div class="accordion-body">
@@ -684,7 +720,7 @@
     <!-- Roadmap -->
     <div class="accordion">
       <div class="accordion-header" onclick="toggle(this)">
-        <span class="accordion-title">Architektur-Roadmap</span>
+        <span class="accordion-title">Architektur-Roadmap <span class="exam-badges"><span class="exam-badge y2526">WS25/26 · 6P</span></span></span>
         <span class="accordion-icon">▾</span>
       </div>
       <div class="accordion-body">
@@ -720,7 +756,7 @@
     <!-- 3 Ziele -->
     <div class="accordion">
       <div class="accordion-header" onclick="toggle(this)">
-        <span class="accordion-title">3 Ziele / Beweggründe für EAM</span>
+        <span class="accordion-title">3 Ziele / Beweggründe für EAM <span class="exam-badges"><span class="exam-badge y2324">WS23/24 · 3P</span><span class="exam-badge y2526">WS25/26 · 3P</span></span></span>
         <span class="accordion-icon">▾</span>
       </div>
       <div class="accordion-body">
@@ -752,7 +788,7 @@
     <!-- Capability -->
     <div class="accordion">
       <div class="accordion-header" onclick="toggle(this)">
-        <span class="accordion-title">Capability (Geschäftsfähigkeit)</span>
+        <span class="accordion-title">Capability (Geschäftsfähigkeit) <span class="exam-badges"><span class="exam-badge y2324">WS23/24 · 6P</span><span class="exam-badge y2526">WS25/26 · 6P</span></span></span>
         <span class="accordion-icon">▾</span>
       </div>
       <div class="accordion-body">
@@ -772,7 +808,7 @@
     <!-- Capability Map -->
     <div class="accordion">
       <div class="accordion-header" onclick="toggle(this)">
-        <span class="accordion-title">Eigenschaften einer Capability Map (mind. 4)</span>
+        <span class="accordion-title">Eigenschaften einer Capability Map (mind. 4) <span class="exam-badges"><span class="exam-badge y2324">WS23/24 · 6P</span><span class="exam-badge y2526">WS25/26 · 6P</span></span></span>
         <span class="accordion-icon">▾</span>
       </div>
       <div class="accordion-body">
@@ -792,7 +828,7 @@
     <!-- Value Stream -->
     <div class="accordion">
       <div class="accordion-header" onclick="toggle(this)">
-        <span class="accordion-title">Value Stream (Wertstrom)</span>
+        <span class="accordion-title">Value Stream (Wertstrom) <span class="exam-badges"><span class="exam-badge y2526">WS25/26 · 6P</span></span></span>
         <span class="accordion-icon">▾</span>
       </div>
       <div class="accordion-body">
@@ -812,7 +848,7 @@
     <!-- 6 Perspektiven -->
     <div class="accordion">
       <div class="accordion-header" onclick="toggle(this)">
-        <span class="accordion-title">6 weitere Perspektiven / Domänen nach Kuehn (2022)</span>
+        <span class="accordion-title">6 weitere Perspektiven / Domänen nach Kuehn (2022) <span class="exam-badges"><span class="exam-badge y2526">WS25/26 · 3P</span></span></span>
         <span class="accordion-icon">▾</span>
       </div>
       <div class="accordion-body">
@@ -833,7 +869,7 @@
     <!-- Silodenken -->
     <div class="accordion">
       <div class="accordion-header" onclick="toggle(this)">
-        <span class="accordion-title">Warum Business Architecture Silodenken überwindet (3 Argumente)</span>
+        <span class="accordion-title">Warum Business Architecture Silodenken überwindet (3 Argumente) <span class="exam-badges"><span class="exam-badge y2526">WS25/26 · 3P</span></span></span>
         <span class="accordion-icon">▾</span>
       </div>
       <div class="accordion-body">
@@ -856,7 +892,7 @@
     <!-- Definition & Metamodell -->
     <div class="accordion">
       <div class="accordion-header" onclick="toggle(this)">
-        <span class="accordion-title">Definition &amp; 3 Bestandteile (Metamodell nach Aier et al.)</span>
+        <span class="accordion-title">Definition &amp; 3 Bestandteile (Metamodell nach Aier et al.) <span class="exam-badges"><span class="exam-badge y2526">WS25/26 · 4P</span></span></span>
         <span class="accordion-icon">▾</span>
       </div>
       <div class="accordion-body">
@@ -895,7 +931,7 @@
     <!-- Anforderungen Sandkuhl -->
     <div class="accordion">
       <div class="accordion-header" onclick="toggle(this)">
-        <span class="accordion-title">5 Anforderungen nach Sandkuhl et al. (2015)</span>
+        <span class="accordion-title">5 Anforderungen nach Sandkuhl et al. (2015) <span class="exam-badges"><span class="exam-badge y2324">WS23/24 · 6P</span></span></span>
         <span class="accordion-icon">▾</span>
       </div>
       <div class="accordion-body">
@@ -930,7 +966,7 @@
     <!-- Beispiele -->
     <div class="accordion">
       <div class="accordion-header" onclick="toggle(this)">
-        <span class="accordion-title">Beispiel-Beurteilungen: Ist es ein Architekturprinzip?</span>
+        <span class="accordion-title">Beispiel-Beurteilungen: Ist es ein Architekturprinzip? <span class="exam-badges"><span class="exam-badge y2324">WS23/24 · 6P</span><span class="exam-badge y2526">WS25/26 · 6P</span></span></span>
         <span class="accordion-icon">▾</span>
       </div>
       <div class="accordion-body">
@@ -973,7 +1009,7 @@
     <!-- Layers -->
     <div class="accordion">
       <div class="accordion-header" onclick="toggle(this)">
-        <span class="accordion-title">4 Ebenen (Layers) des ArchiMate Full Frameworks</span>
+        <span class="accordion-title">4 Ebenen (Layers) des ArchiMate Full Frameworks <span class="exam-badges"><span class="exam-badge y2526">WS25/26 · 12P</span></span></span>
         <span class="accordion-icon">▾</span>
       </div>
       <div class="accordion-body">
@@ -993,7 +1029,7 @@
     <!-- Aspekte -->
     <div class="accordion">
       <div class="accordion-header" onclick="toggle(this)">
-        <span class="accordion-title">3 Aspekte (pro Layer)</span>
+        <span class="accordion-title">3 Aspekte (pro Layer) <span class="exam-badges"><span class="exam-badge y2526">WS25/26 · 12P</span></span></span>
         <span class="accordion-icon">▾</span>
       </div>
       <div class="accordion-body">
@@ -1009,7 +1045,7 @@
     <!-- Elemente -->
     <div class="accordion">
       <div class="accordion-header" onclick="toggle(this)">
-        <span class="accordion-title">Wichtige Elemente pro Layer</span>
+        <span class="accordion-title">Wichtige Elemente pro Layer <span class="exam-badges"><span class="exam-badge y2526">WS25/26 · 12P</span></span></span>
         <span class="accordion-icon">▾</span>
       </div>
       <div class="accordion-body">
@@ -1051,7 +1087,7 @@
     <!-- Beziehungen -->
     <div class="accordion">
       <div class="accordion-header" onclick="toggle(this)">
-        <span class="accordion-title">Wichtige Beziehungstypen in ArchiMate</span>
+        <span class="accordion-title">Wichtige Beziehungstypen in ArchiMate <span class="exam-badges"><span class="exam-badge y2324">WS23/24 · 6P</span><span class="exam-badge y2526">WS25/26 · 8P</span></span></span>
         <span class="accordion-icon">▾</span>
       </div>
       <div class="accordion-body">
@@ -1100,7 +1136,7 @@
     <!-- 6 Tätigkeitsfelder -->
     <div class="accordion">
       <div class="accordion-header" onclick="toggle(this)">
-        <span class="accordion-title">6 EAM-Tätigkeitsfelder</span>
+        <span class="accordion-title">6 EAM-Tätigkeitsfelder <span class="exam-badges"><span class="exam-badge y2526">WS25/26 · 5P</span></span></span>
         <span class="accordion-icon">▾</span>
       </div>
       <div class="accordion-body">
@@ -1119,7 +1155,7 @@
     <!-- 2 Kernaktivitäten -->
     <div class="accordion">
       <div class="accordion-header" onclick="toggle(this)">
-        <span class="accordion-title">2 Kernaktivitäten der Architekturentwicklung</span>
+        <span class="accordion-title">2 Kernaktivitäten der Architekturentwicklung <span class="exam-badges"><span class="exam-badge y2526">WS25/26 · 8P</span></span></span>
         <span class="accordion-icon">▾</span>
       </div>
       <div class="accordion-body">
@@ -1139,7 +1175,7 @@
     <!-- Operating Model -->
     <div class="accordion">
       <div class="accordion-header" onclick="toggle(this)">
-        <span class="accordion-title">Operating Models nach Ross et al. (2006)</span>
+        <span class="accordion-title">Operating Models nach Ross et al. (2006) <span class="exam-badges"><span class="exam-badge y2526">WS25/26 · 8P</span></span></span>
         <span class="accordion-icon">▾</span>
       </div>
       <div class="accordion-body">
@@ -1168,7 +1204,7 @@
     <!-- 3 Disziplinen -->
     <div class="accordion">
       <div class="accordion-header" onclick="toggle(this)">
-        <span class="accordion-title">3 Disziplinen für EAM-Verzahnung</span>
+        <span class="accordion-title">3 Disziplinen für EAM-Verzahnung <span class="exam-badges"><span class="exam-badge y2526">WS25/26 · 3P</span></span></span>
         <span class="accordion-icon">▾</span>
       </div>
       <div class="accordion-body">
@@ -1191,7 +1227,7 @@
     <!-- 6 Dimensionen -->
     <div class="accordion">
       <div class="accordion-header" onclick="toggle(this)">
-        <span class="accordion-title">6 EAM-Gestaltungsdimensionen</span>
+        <span class="accordion-title">6 EAM-Gestaltungsdimensionen <span class="exam-badges"><span class="exam-badge y2324">WS23/24 · 16P</span><span class="exam-badge y2526">WS25/26 · 14P</span></span></span>
         <span class="accordion-icon">▾</span>
       </div>
       <div class="accordion-body">
@@ -1210,7 +1246,7 @@
     <!-- 3 Organisationsmodelle -->
     <div class="accordion">
       <div class="accordion-header" onclick="toggle(this)">
-        <span class="accordion-title">3 Organisationsmodelle</span>
+        <span class="accordion-title">3 Organisationsmodelle <span class="exam-badges"><span class="exam-badge y2324">WS23/24 · 6P</span><span class="exam-badge y2526">WS25/26 · 6P</span></span></span>
         <span class="accordion-icon">▾</span>
       </div>
       <div class="accordion-body">
@@ -1237,7 +1273,7 @@
     <!-- EAM in/außer IT -->
     <div class="accordion">
       <div class="accordion-header" onclick="toggle(this)">
-        <span class="accordion-title">EAM innerhalb oder außerhalb der IT?</span>
+        <span class="accordion-title">EAM innerhalb oder außerhalb der IT? <span class="exam-badges"><span class="exam-badge y2324">WS23/24 · 6P</span></span></span>
         <span class="accordion-icon">▾</span>
       </div>
       <div class="accordion-body">
@@ -1253,7 +1289,7 @@
     <!-- Vorgehensmodell -->
     <div class="accordion">
       <div class="accordion-header" onclick="toggle(this)">
-        <span class="accordion-title">Vorgehensmodell zur EAM-Einführung (5 Schritte)</span>
+        <span class="accordion-title">Vorgehensmodell zur EAM-Einführung (5 Schritte) <span class="exam-badges"><span class="exam-badge y2526">WS25/26 · 14P</span></span></span>
         <span class="accordion-icon">▾</span>
       </div>
       <div class="accordion-body">
