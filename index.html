@@ -210,6 +210,20 @@
       color: var(--muted);
     }
     .exam-legend strong { color: var(--text); }
+
+    /* ── Slide images ── */
+    .slide-fig { margin-top: 14px; text-align: center; }
+    .slide-fig img {
+      max-width: 100%;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 8px rgba(0,0,0,.06);
+    }
+    .slide-caption {
+      font-size: .76rem;
+      color: var(--muted);
+      margin-top: 6px;
+    }
     .accordion.open .accordion-icon { transform: rotate(180deg); }
     .accordion-body {
       max-height: 0;
@@ -720,6 +734,10 @@
         <div class="hbox hbox-def" style="margin-top:10px">
           <strong>🔀 Transition Architecture</strong> — Zwischenzustände auf dem Weg von Baseline zu Target Architecture. Hilft, die Transformation in machbare Schritte zu unterteilen.
         </div>
+        <div class="slide-fig">
+          <img src="images/architekturzustaende-diagramm.png" alt="Baseline, Transition und Target Architecture im Zeitverlauf">
+          <div class="slide-caption">Quelle: Vorlesungsfolie, The Open Group (2022)</div>
+        </div>
       </div>
     </div>
 
@@ -740,6 +758,10 @@
           <li>Verantwortlichkeiten</li>
           <li>Sequenz von Transformationen</li>
         </ul>
+        <div class="slide-fig">
+          <img src="images/architekturroadmap-diagramm.png" alt="Architekturroadmap: von As-is über Transition Architectures zur Target Architecture">
+          <div class="slide-caption">Quelle: Vorlesungsfolie, nach Hanschke (2010)</div>
+        </div>
       </div>
     </div>
 
@@ -808,6 +830,10 @@
           <tr><td>Stabil, unabhängig von der Org-Struktur</td><td>Kann sich ändern (Reorganisation etc.)</td></tr>
           <tr><td>z.B. "Kundenverwaltung"</td><td>z.B. "Kunde anlegen → prüfen → bestätigen"</td></tr>
         </table>
+        <div class="slide-fig">
+          <img src="images/capability-map-beispiel.png" alt="Beispiel Capability Map mit Strategic, Core und Supporting Tier">
+          <div class="slide-caption">Quelle: Vorlesungsfolie, BIZBOK® Guide</div>
+        </div>
       </div>
     </div>
 
@@ -831,18 +857,21 @@
       </div>
     </div>
 
-    <!-- Vier Szenarien Capability Map -->
+    <!-- IT-bezogene Einsatzszenarien Capability Map -->
     <div class="accordion">
       <div class="accordion-header" onclick="toggle(this)">
-        <span class="accordion-title">4 Szenarien für eine Capability Map <span class="exam-badges"><span class="exam-badge yss24">SS24</span></span></span>
+        <span class="accordion-title">(IT-bezogene) Einsatzszenarien einer Capability Map <span class="exam-badges"><span class="exam-badge yss24">SS24</span></span></span>
         <span class="accordion-icon">▾</span>
       </div>
       <div class="accordion-body">
-        <div class="g2" style="margin-top:8px">
-          <div class="card"><h4>🔗 IT Business Alignment</h4><p>Geschäftsfähigkeiten mit IT-Unterstützung abgleichen</p></div>
-          <div class="card"><h4>📋 Project Portfolio Planning</h4><p>Projekte anhand von Capabilities priorisieren</p></div>
-          <div class="card"><h4>⚙️ Business Process Optimization</h4><p>Prozesse anhand betroffener Fähigkeiten optimieren</p></div>
-          <div class="card"><h4>✅ Compliance Management</h4><p>Regulatorische Anforderungen Capabilities zuordnen</p></div>
+        <div class="hbox hbox-warn" style="margin-top:8px">
+          <strong>Korrigiert:</strong> Die ursprüngliche SS24-Zusammenfassung nannte hier "IT Business Alignment / Project Portfolio Planning / Business Process Optimization / Compliance Management" — das stimmte nicht mit der offiziellen Vorlesungsfolie überein. Unten die laut Folie korrekten Szenarien.
+        </div>
+        <div class="g2" style="margin-top:12px">
+          <div class="card"><h4>🔀 Identifikation von Harmonisierungspotenzial</h4><p>Redundante/ähnliche IT-Unterstützung über Capabilities hinweg erkennen</p></div>
+          <div class="card"><h4>🧩 Bewertung der Applikationskomplexität</h4><p>Komplexität der Anwendungslandschaft je Capability einschätzen</p></div>
+          <div class="card"><h4>📋 Projektportfoliomanagement</h4><p>Projekte anhand betroffener Capabilities priorisieren</p></div>
+          <div class="card"><h4>💰 Kostenmanagement</h4><p>Kosten den Capabilities zuordnen und steuern</p></div>
         </div>
       </div>
     </div>
@@ -864,6 +893,10 @@
           <li>Keine klassische Prozessdarstellung</li>
           <li>Bildet <strong>alle möglichen Szenarien</strong> ab</li>
         </ul>
+        <div class="slide-fig">
+          <img src="images/value-stream-diagramm.png" alt="Value Stream Struktur: Triggering Stakeholder, Value Stream Stages, Value Proposition">
+          <div class="slide-caption">Quelle: Vorlesungsfolie, Kuehn (2022)</div>
+        </div>
       </div>
     </div>
 
@@ -934,6 +967,10 @@
           <tr><td><strong>Rationale</strong></td><td>Begründung — Warum gilt dieses Prinzip?</td></tr>
           <tr><td><strong>Implications</strong></td><td>Konsequenzen — Was bedeutet das konkret?</td></tr>
         </table>
+        <div class="slide-fig">
+          <img src="images/architekturprinzip-metamodell.png" alt="Metamodell der Bestandteile eines Architekturprinzips: Rationale, Statement, Implication, Key Action, Measure">
+          <div class="slide-caption">Quelle: Vorlesungsfolie, Aier et al. (2011)</div>
+        </div>
       </div>
     </div>
 
@@ -1131,6 +1168,19 @@
           <tr><td><strong>Aggregation</strong></td><td>◇ (offen)</td><td>Aggregation (nicht exklusiv)</td></tr>
           <tr><td><strong>Influence</strong></td><td>- - → (gestrichelt)</td><td>Beeinflussung</td></tr>
         </table>
+        <div class="lbl" style="margin-top:14px">Offizielle Symbol-Übersicht (Vorlesungsfolien)</div>
+        <div class="slide-fig">
+          <img src="images/archimate-beziehungen-2-structural.png" alt="ArchiMate Structural Relationships: Realization, Assignment, Aggregation, Composition">
+          <div class="slide-caption">Structural Relationships — Quelle: The Open Group (2022), Lankhorst et al. (2017)</div>
+        </div>
+        <div class="slide-fig">
+          <img src="images/archimate-beziehungen-3-dynamic.png" alt="ArchiMate Dynamic Relationships: Triggering, Flow, Junction">
+          <div class="slide-caption">Dynamic Relationships &amp; Junction — Quelle: The Open Group (2022), Lankhorst et al. (2017)</div>
+        </div>
+        <div class="slide-fig">
+          <img src="images/archimate-beziehungen-1-dependency.png" alt="ArchiMate Dependency Relationships: Association, Influence, Access, Serving">
+          <div class="slide-caption">Dependency Relationships — Quelle: The Open Group (2022), Lankhorst et al. (2017)</div>
+        </div>
       </div>
     </div>
 
