@@ -261,6 +261,28 @@
     .hbox-warn { background: #fef3c7; border-color: #f59e0b; color: #78350f; }
     .hbox-ok   { background: #f0fdf4; border-color: #22c55e; color: #14532d; }
 
+    /* ── Klausurfrage callouts ── */
+    .examq {
+      margin-top: 12px;
+      border: 1px solid #e9d5ff;
+      background: #faf5ff;
+      border-radius: 10px;
+      padding: 12px 14px;
+    }
+    .examq-head {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: .72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: #6b21a8;
+      margin-bottom: 6px;
+    }
+    .examq p { font-size: .88rem; margin: 0 0 6px; font-style: italic; color: #3b0764; }
+    .examq p:last-child { margin-bottom: 0; }
+
     /* Grid cards */
     .g2 {
       display: grid;
@@ -738,6 +760,11 @@
           <img src="images/architekturzustaende-diagramm.png" alt="Baseline, Transition und Target Architecture im Zeitverlauf">
           <div class="slide-caption">Quelle: Vorlesungsfolie, The Open Group (2022)</div>
         </div>
+        <div class="examq">
+          <div class="examq-head">📝 Klausurfrage (sinngemäß)</div>
+          <p>WS23/24 (3P): Nennen und definieren Sie drei Architekturzustände, die in der Praxis oftmals unterschieden werden.</p>
+          <p>SS24: Nennen Sie die drei typischen Architekturzustände.</p>
+        </div>
       </div>
     </div>
 
@@ -762,6 +789,11 @@
           <img src="images/architekturroadmap-diagramm.png" alt="Architekturroadmap: von As-is über Transition Architectures zur Target Architecture">
           <div class="slide-caption">Quelle: Vorlesungsfolie, nach Hanschke (2010)</div>
         </div>
+        <div class="examq">
+          <div class="examq-head">📝 Klausurfrage (sinngemäß)</div>
+          <p>WS25/26 (6P): Erläutern Sie, was unter einer Architektur-Roadmap zu verstehen ist, was diese typischerweise abbildet und in welchem Zusammenhang sie zu den Architekturzuständen steht. Nennen Sie außerdem die zwei ADM-Phasen, die sich auf die Entwicklung einer Architektur-Roadmap fokussieren.</p>
+          <p>SS24: Erläutern Sie die Architektur-Roadmap.</p>
+        </div>
       </div>
     </div>
 
@@ -778,6 +810,10 @@
           <tr><td><strong>Domain Level</strong></td><td>Spezifische Geschäfts- oder IT-Bereiche</td></tr>
           <tr><td><strong>Solution Level</strong></td><td>Einzelne Systeme oder Lösungen</td></tr>
         </table>
+        <div class="examq">
+          <div class="examq-head">📝 Klausurfrage (sinngemäß)</div>
+          <p>SS24: Nennen und erläutern Sie die drei Ebenen der Architekturbetrachtung (Umfang und Tiefe der Architekturbetrachtung).</p>
+        </div>
       </div>
     </div>
 
@@ -801,6 +837,10 @@
             <h4>🚀 Strategie umsetzen</h4>
             <p>"Drive Transformation" — Strategie in operatives Handeln übersetzen</p>
           </div>
+        </div>
+        <div class="examq">
+          <div class="examq-head">📝 Klausurfrage (sinngemäß)</div>
+          <p>WS23/24 (3P) &amp; WS25/26 (3P): Nennen Sie drei typische Ziele bzw. Beweggründe für die Etablierung eines Enterprise Architecture Managements (EAM).</p>
         </div>
       </div>
     </div>
@@ -834,6 +874,12 @@
           <img src="images/capability-map-beispiel.png" alt="Beispiel Capability Map mit Strategic, Core und Supporting Tier">
           <div class="slide-caption">Quelle: Vorlesungsfolie, BIZBOK® Guide</div>
         </div>
+        <div class="examq">
+          <div class="examq-head">📝 Klausurfrage (sinngemäß)</div>
+          <p>WS23/24 (6P): Definieren Sie das Konzept "Capability" und grenzen Sie es vom Geschäftsprozess ab.</p>
+          <p>WS25/26 (6P): Definieren Sie "Capability" und "Value Stream" jeweils kurz.</p>
+          <p>SS24: Definition Capability &amp; Abgrenzung vom Geschäftsprozess — plus Bewertung konkreter Geschäftsfähigkeiten (z.B. Produktinformationsmanagement ✓, Windows-Serverbetrieb ✗ da technologische Aufgabe, Dokumentenscanning ✗ da operativer Prozess).</p>
+        </div>
       </div>
     </div>
 
@@ -854,6 +900,11 @@
           <li><strong>Redundanzfrei</strong> — jede Fähigkeit nur einmal</li>
           <li><strong>Vollständig</strong> — alle relevanten Fähigkeiten abgedeckt</li>
         </ul>
+        <div class="examq">
+          <div class="examq-head">📝 Klausurfrage (sinngemäß)</div>
+          <p>WS23/24 (6P, Teil der Capability-Frage): Nennen Sie außerdem vier wesentliche Eigenschaften einer Capability Map.</p>
+          <p>WS25/26 (6P, Teil der Capability/Value-Stream-Frage): Nennen Sie jeweils mindestens zwei wesentliche Eigenschaften von Capabilities (bzw. einer Capability Map).</p>
+        </div>
       </div>
     </div>
 
@@ -897,6 +948,10 @@
           <img src="images/value-stream-diagramm.png" alt="Value Stream Struktur: Triggering Stakeholder, Value Stream Stages, Value Proposition">
           <div class="slide-caption">Quelle: Vorlesungsfolie, Kuehn (2022)</div>
         </div>
+        <div class="examq">
+          <div class="examq-head">📝 Klausurfrage (sinngemäß)</div>
+          <p>WS25/26 (6P, gemeinsam mit Capability): Definieren Sie "Value Stream" kurz und nennen Sie mindestens zwei wesentliche Eigenschaften von Wertströmen.</p>
+        </div>
       </div>
     </div>
 
@@ -924,6 +979,10 @@
         <div class="hbox hbox-ok" style="margin-top:10px">
           <strong>Hinweis:</strong> Die Original-Folie (Kuehn 2022, BIZBOK® Guide) zeigt insgesamt <strong>10 Perspektiven/Domänen</strong> — zusätzlich zu den obigen 6 noch <strong>Policies</strong> und <strong>Metrics</strong>. In der Klausur (WS25/26) wurden explizit nur die <strong>6 weiteren</strong> (ohne Capabilities/Value Streams) verlangt.
         </div>
+        <div class="examq">
+          <div class="examq-head">📝 Klausurfrage (sinngemäß)</div>
+          <p>WS25/26 (3P): Nennen Sie sechs weitere Perspektiven/Domänen (neben "Capabilities" und "Value Streams") der Business Architecture nach Kuehn (2022).</p>
+        </div>
       </div>
     </div>
 
@@ -939,6 +998,10 @@
           <li><strong>Ganzheitliche Betrachtung</strong> der gesamten Unternehmensleistung</li>
           <li><strong>Transparenz über Abhängigkeiten</strong> zwischen verschiedenen Bereichen</li>
         </ul>
+        <div class="examq">
+          <div class="examq-head">📝 Klausurfrage (sinngemäß)</div>
+          <p>WS25/26 (3P): Begründen Sie kurz anhand von drei Argumenten, warum der Einsatz von Business Architecture einen Beitrag zur Überwindung von Silodenken leisten kann.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -971,6 +1034,10 @@
           <img src="images/architekturprinzip-metamodell.png" alt="Metamodell der Bestandteile eines Architekturprinzips: Rationale, Statement, Implication, Key Action, Measure">
           <div class="slide-caption">Quelle: Vorlesungsfolie, Aier et al. (2011)</div>
         </div>
+        <div class="examq">
+          <div class="examq-head">📝 Klausurfrage (sinngemäß)</div>
+          <p>WS25/26 (4P): Definieren Sie kurz, was ein Architekturprinzip ist, und nennen Sie drei typische Bestandteile der Beschreibung eines Architekturprinzips.</p>
+        </div>
       </div>
     </div>
 
@@ -990,6 +1057,10 @@
         <div class="hbox hbox-warn" style="margin-top:10px">
           Weitere Treiber: <strong>Risiken</strong> und <strong>Chancen</strong>
         </div>
+        <div class="examq">
+          <div class="examq-head">📝 Klausurfrage (sinngemäß)</div>
+          <p>SS24: Definieren Sie Architekturprinzipien und nennen Sie die vier Einflussfaktoren (Treiber) nach Greefhorst &amp; Proper, die deren Entwicklung wesentlich beeinflussen.</p>
+        </div>
       </div>
     </div>
 
@@ -1007,6 +1078,13 @@
           <li><strong>Prozessverankerung</strong></li>
           <li><strong>Messung des Erfüllungsgrads</strong></li>
         </ul>
+        <div class="examq">
+          <div class="examq-head">📝 Klausurfrage (sinngemäß)</div>
+          <p>WS23/24 (6P): Definieren Sie kurz, was ein Architekturprinzip ist, und skizzieren Sie anschließend <strong>vier</strong> wesentliche Anforderungen, die sich gemäß Sandkuhl et al. (2015) an Architekturprinzipien bzw. deren Entwicklung und Einsatz ergeben.</p>
+        </div>
+        <div class="hbox hbox-warn" style="margin-top:10px">
+          <strong>Hinweis:</strong> Die Klausur verlangte konkret <strong>vier</strong> Anforderungen — diese Karte listet fünf mögliche zur Auswahl.
+        </div>
       </div>
     </div>
 
@@ -1037,6 +1115,10 @@
       <div class="accordion-body">
         <div class="hbox hbox-warn" style="margin-top:8px; margin-bottom:14px">
           <strong>Prüfungstipp:</strong> Prinzip = qualitative Leitlinie. KEIN Prinzip: technische Standards, Definitionen, Methodiken oder konkrete Toolentscheidungen.
+        </div>
+        <div class="examq">
+          <div class="examq-head">📝 Klausurfrage (sinngemäß)</div>
+          <p>Wiederkehrendes Format (SS24, WS23/24 · 6P, WS25/26 · 6P): Diskutieren Sie, ob es sich bei folgenden Aussagen jeweils um gute Kandidaten für Architekturprinzipien einer Organisation handeln könnte. Begründen Sie Ihre Einschätzung jeweils kurz. Die Aussagen unten sind die tatsächlich geprüften Beispiele aus allen drei Klausurjahrgängen.</p>
         </div>
         <div class="pv yes"><span class="pv-tag">✅ JA</span><span>"Applikationen sollen modular aufgebaut sein" — allgemeine Design-Richtlinie</span></div>
         <div class="pv no"><span class="pv-tag">❌ NEIN</span><span>"Google Chrome ist unser Standard-Webbrowser" — technische Vorgabe / Standard</span></div>
@@ -1087,6 +1169,10 @@
         </table>
         <div class="hbox hbox-warn" style="margin-top:10px">
           Weitere Layers: <strong>Physical Layer</strong> und <strong>Implementation &amp; Migration Layer</strong>
+        </div>
+        <div class="examq">
+          <div class="examq-head">📝 Klausurfrage (sinngemäß)</div>
+          <p>WS25/26 (12P, deckt diese + die nächsten zwei Karten ab): Nennen Sie vier Ebenen ("Layers") und alle Aspekte des ArchiMate Full Frameworks. Nennen Sie außerdem pro genannter Ebene jeweils mindestens zwei zugehörige Konzepte (Elementtypen) und definieren bzw. erläutern Sie die genannten Aspekte der Sprache.</p>
         </div>
       </div>
     </div>
@@ -1181,6 +1267,14 @@
           <img src="images/archimate-beziehungen-1-dependency.png" alt="ArchiMate Dependency Relationships: Association, Influence, Access, Serving">
           <div class="slide-caption">Dependency Relationships — Quelle: The Open Group (2022), Lankhorst et al. (2017)</div>
         </div>
+        <div class="examq">
+          <div class="examq-head">📝 Klausurfrage (sinngemäß)</div>
+          <p>WS23/24 (6P) &amp; WS25/26 (8P): Betrachten Sie das gegebene ArchiMate-Diagramm (beide Jahre: ein "Reklamation bearbeiten"-Prozess, WS25/26 zusätzlich mit Smart-CRM-/Web-Service-Anwendungslandschaft). Beschreiben Sie den abgebildeten Sachverhalt unter Verwendung der in der Vorlesung kennengelernten Bezeichnungen der jeweiligen ArchiMate-Element- und Beziehungstypen.</p>
+          <p>SS24: Diagrammbeschreibung anhand der ArchiMate-Sprache erforderlich.</p>
+        </div>
+        <div class="hbox hbox-def" style="margin-top:10px">
+          <strong>Übungstipp:</strong> Diese Aufgabenart taucht praktisch jedes Jahr auf — üben Sie, ein beliebiges Geschäftsprozess-Diagramm (Business-, Application- und Technology-Layer-Elemente mit Trigger-/Realization-/Serving-Pfeilen) frei mit den korrekten ArchiMate-Fachbegriffen zu beschreiben.
+        </div>
       </div>
     </div>
 
@@ -1199,6 +1293,10 @@
         </table>
         <div class="hbox hbox-ok" style="margin-top:10px">
           <strong>Merkhilfe:</strong> Viewpoint = Template (abstrakt) &nbsp;|&nbsp; View = Instanz (konkret)
+        </div>
+        <div class="examq">
+          <div class="examq-head">📝 Klausurfrage (sinngemäß)</div>
+          <p>SS24: Erläutern Sie die Begriffe Viewpoint, View &amp; Concern jeweils kurz und nennen Sie ein Beispiel (z.B. eine "Security View", die Sicherheitsbedenken eines CISO adressiert).</p>
         </div>
       </div>
     </div>
@@ -1220,6 +1318,10 @@
           <li>Wo fehlen IT-Lösungen für Geschäftsprozesse?</li>
           <li>Welche Systeme müssen bei einer Prozessänderung angepasst werden?</li>
         </ul>
+        <div class="examq">
+          <div class="examq-head">📝 Klausurfrage (sinngemäß)</div>
+          <p>SS24: Beschreiben Sie die Business Support Matrix (Dimensionen) und nennen Sie typische Fragen, die sich mit ihr beantworten lassen.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -1256,6 +1358,10 @@
         <div class="hbox hbox-warn" style="margin-top:10px">
           Für das <strong>Zachman Framework</strong> enthalten die Vorlesungsfolien nur ein Zitat von John Zachman, kein offizielles Diagramm — daher hier keine Foliengrafik verfügbar.
         </div>
+        <div class="examq">
+          <div class="examq-head">📝 Klausurfrage (sinngemäß)</div>
+          <p>SS24: Nennen Sie drei EAM-Rahmenwerke.</p>
+        </div>
       </div>
     </div>
 
@@ -1268,6 +1374,10 @@
       <div class="accordion-body">
         <div class="hbox hbox-warn" style="margin-top:8px">
           <strong>Hinweis:</strong> Für diese Frage liegt uns keine gesicherte Musterlösung vor — bitte mit den eigenen Vorlesungsunterlagen (Jung &amp; Frauenholz 2021) abgleichen, bevor Sie sich darauf verlassen.
+        </div>
+        <div class="examq">
+          <div class="examq-head">📝 Klausurfrage (sinngemäß)</div>
+          <p>WS23/24 (4P): Nennen und erläutern Sie kurz vier typische Komponenten eines EAM-Rahmenwerks (z.B. in Anlehnung an Jung &amp; Frauenholz 2021).</p>
         </div>
       </div>
     </div>
@@ -1296,6 +1406,11 @@
         <div class="hbox hbox-warn" style="margin-top:10px">
           <strong>Requirements Management</strong> steht im Zentrum aller Phasen (A&ndash;H) — kontinuierliche Anforderungserfassung &amp; -prüfung während des gesamten Zyklus.
         </div>
+        <div class="examq">
+          <div class="examq-head">📝 Klausurfrage (sinngemäß)</div>
+          <p>WS23/24 (10P): Nennen und erläutern Sie kurz die Phasen A bis H der ADM in der vorgesehenen logischen Reihenfolge. Skizzieren Sie zudem, welche Rolle die Phase des "Requirements Management" in der ADM einnimmt und was Gegenstand der sogenannten "Preliminary Phase" ist.</p>
+          <p>SS24: Phasen A&ndash;H der ADM.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -1323,6 +1438,10 @@
           <tr><td>5</td><td><strong>EAM-Kommunikation</strong></td><td>Stakeholder informieren, Darstellungen erstellen</td></tr>
           <tr><td>6</td><td><strong>EAM-Steuerung</strong></td><td>EAM-Prozesse und Organisation managen</td></tr>
         </table>
+        <div class="examq">
+          <div class="examq-head">📝 Klausurfrage (sinngemäß)</div>
+          <p>WS25/26 (5P): Nennen Sie die fünf weiteren (neben der "Architekturentwicklung") in der Vorlesung betrachteten EAM-Tätigkeitsfelder.</p>
+        </div>
       </div>
     </div>
 
@@ -1342,6 +1461,10 @@
             <h4>🗺️ Architektur-Roadmap steuern</h4>
             <p>Roadmap erstellen, steuern und aktuell halten</p>
           </div>
+        </div>
+        <div class="examq">
+          <div class="examq-head">📝 Klausurfrage (sinngemäß)</div>
+          <p>WS25/26 (8P, gemeinsam mit Operating Model): Nennen und erläutern Sie zwei Kernaktivitäten, die im Kontext des Tätigkeitsfeldes "Architekturentwicklung" stattfinden. Nehmen Sie dabei auch Bezug auf die zwei Dimensionen des Konzepts des "Operating Models" nach Ross et al. (2006) und skizzieren Sie, im Rahmen welcher Aktivitäten eine Betrachtung dieser Dimensionen von Relevanz sein könnte.</p>
         </div>
       </div>
     </div>
@@ -1372,6 +1495,10 @@
             <td style="background:#f3e8ff"><strong>Unification</strong><br><small>Max. Standardisierung &amp; Integration</small></td>
           </tr>
         </table>
+        <div class="examq">
+          <div class="examq-head">📝 Klausurfrage (sinngemäß)</div>
+          <p>WS25/26 (8P, siehe vorherige Karte): Bezug auf die zwei Dimensionen (Standardisierung, Integration) des Operating-Model-Konzepts nach Ross et al. (2006) im Rahmen der Architekturentwicklung.</p>
+        </div>
       </div>
     </div>
 
@@ -1389,6 +1516,10 @@
         </ul>
         <div class="hbox hbox-def" style="margin-top:10px">
           Diese 3-Klausur-Kurzform verdichtet die 5 Disziplinen der Vorlesung (VB02, S. 72&ndash;76) &mdash; siehe Detail-Karte unten für die vollständige, offizielle Aufschlüsselung.
+        </div>
+        <div class="examq">
+          <div class="examq-head">📝 Klausurfrage (sinngemäß)</div>
+          <p>WS25/26 (3P): Nennen Sie drei Disziplinen, mit denen ein EAM in der Praxis möglichst verzahnt werden sollte, sodass ein entsprechendes Zusammenspiel entsteht.</p>
         </div>
       </div>
     </div>
@@ -1474,6 +1605,11 @@
           <tr><td>5</td><td><strong>EAM-Prozesse</strong></td><td>Kern-, Steuerungs- und Unterstützungsprozesse</td></tr>
           <tr><td>6</td><td><strong>EAM-Organisation</strong></td><td>Rollen, Struktur, Gremien</td></tr>
         </table>
+        <div class="examq">
+          <div class="examq-head">📝 Klausurfrage (sinngemäß)</div>
+          <p>WS23/24 (16P, Fallstudie): In einem internationalen Handelskonzern wurde EAM vor Jahren mit Hilfe eines externen Beraters eingeführt, der zunächst ein von ihm bevorzugtes EAM-Werkzeug beschaffen ließ und das EAM eng am TOGAF-Standard ausrichtete; organisatorisch verankert als kleines Team in der zentralen Unternehmens-IT, das primär manuell Architekturdaten pflegt und Vorgaben an Landesgesellschaften weitergibt. Der EAM-Erfolg zeigt sich heute als sehr begrenzt. Diskutieren Sie, welche Fehler/Versäumnisse bei der Einführung dazu geführt haben könnten, und erläutern Sie ein erfolgversprechenderes Vorgehen. Gehen Sie dabei auf <strong>alle</strong> Dimensionen der EAM-Gestaltung ein.</p>
+          <p>WS25/26 (14P, gemeinsam mit Vorgehensmodell-Karte): Nennen Sie zudem alle Dimensionen der EAM-Gestaltung und beschreiben Sie jeweils kurz, welche Überlegungen bzw. Entscheidungen diese jeweils umfassen würden.</p>
+        </div>
       </div>
     </div>
 
@@ -1501,6 +1637,12 @@
             <p style="color:#b45309;margin-top:6px"><strong>Häufigster Ansatz in der Praxis</strong></p>
           </div>
         </div>
+        <div class="examq">
+          <div class="examq-head">📝 Klausurfrage (sinngemäß)</div>
+          <p>WS23/24 (Teil einer 6P-Frage, gemeinsam mit "IT innerhalb/außerhalb"): Erläutern Sie kurz, in welcher Situation bzw. unter welchen Rahmenbedingungen sich welcher der drei Ansätze (zentral/dezentral/hybrid) empfehlen würde.</p>
+          <p>WS25/26 (6P): Erläutern Sie die drei Ansätze kurz und diskutieren Sie, unter welchen Voraussetzungen (Rahmenbedingungen und Zielsetzungen) die Ansätze jeweils geeignet wären.</p>
+          <p>SS24: Organisationsmodelle des EAM (zentralisiert / dezentralisiert / hybrid).</p>
+        </div>
       </div>
     </div>
 
@@ -1517,6 +1659,10 @@
           <tr><td><strong>Vorteil</strong></td><td>Bessere IT-Integration</td><td>Mehr Business-Nähe</td></tr>
           <tr><td><strong>Risiko</strong></td><td>Business-Ferne</td><td>IT-Distanz</td></tr>
         </table>
+        <div class="examq">
+          <div class="examq-head">📝 Klausurfrage (sinngemäß)</div>
+          <p>WS23/24 (Teil einer 6P-Frage, gemeinsam mit "3 Organisationsmodelle"): Gehen Sie kurz auf die Frage ein, was jeweils dafürsprechen könnte, das EAM innerhalb oder außerhalb der IT-Abteilung(en) des Unternehmens zu verankern.</p>
+        </div>
       </div>
     </div>
 
@@ -1534,6 +1680,11 @@
           <li><strong>Tooling &amp; Methoden auswählen</strong></li>
           <li><strong>Schrittweise Umsetzung &amp; Anpassung</strong></li>
         </ol>
+        <div class="examq">
+          <div class="examq-head">📝 Klausurfrage (sinngemäß)</div>
+          <p>WS25/26 (14P, gemeinsam mit "6 EAM-Gestaltungsdimensionen"): Skizzieren Sie das in der Vorlesung empfohlene Vorgehen zur Einführung bzw. Ausgestaltung eines EAM in einer Organisation.</p>
+          <p>SS24: Vorgehensmodell zur Einführung von EAM.</p>
+        </div>
       </div>
     </div>
   </section>
